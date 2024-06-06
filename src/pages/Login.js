@@ -113,21 +113,24 @@ const Login = () => {
           className="d-flex align-items-center auth-bg px-2 p-lg-5"
           lg="4"
           sm="12"
+          dir="rtl"
         >
           <Col className="px-xl-2 mx-auto" sm="8" md="6" lg="12">
-            <CardTitle tag="h2" className="fw-bold mb-1">
-              Welcome to Vuexy! 👋
+            <CardTitle tag="h1" className="fw-bold mb-1">
+              به پنل ادمین خوش آمدید ! 👋
             </CardTitle>
-            <CardText className="mb-2">
-              Please sign-in to your account and start the adventure
+            <CardText tag="h5" className="mb-2">
+              لطفا برای دسترسی به پنل ادمین ورود کنید
             </CardText>
             <Form
               className="auth-login-form mt-2"
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
             >
               <div className="mb-1">
                 <Label className="form-label" for="login-email">
-                  Email
+                  ایمیل یا شماره تماس
                 </Label>
                 <Input
                   type="email"
@@ -139,11 +142,11 @@ const Login = () => {
               <div className="mb-1">
                 <div className="d-flex justify-content-between">
                   <Label className="form-label" for="login-password">
-                    Password
+                    رمز عبور
                   </Label>
-                  <Link to="/forgot-password">
+                  {/* <Link to="/forgot-password">
                     <small>Forgot Password?</small>
-                  </Link>
+                  </Link> */}
                 </div>
                 <InputPasswordToggle
                   className="input-group-merge"
@@ -153,14 +156,14 @@ const Login = () => {
               <div className="form-check mb-1">
                 <Input type="checkbox" id="remember-me" />
                 <Label className="form-check-label" for="remember-me">
-                  Remember Me
+                  مرا به یاد بیاور !
                 </Label>
               </div>
               <Button tag={Link} to="/" color="primary" block>
-                Sign in
+                ورود به پنل
               </Button>
             </Form>
-            <p className="text-center mt-2">
+            {/* <p className="text-center mt-2">
               <span className="me-25">New on our platform?</span>
               <Link to="/register">
                 <span>Create an account</span>
@@ -182,7 +185,7 @@ const Login = () => {
               <Button className="me-0" color="github">
                 <GitHub size={14} />
               </Button>
-            </div>
+            </div> */}
           </Col>
         </Col>
       </Row>

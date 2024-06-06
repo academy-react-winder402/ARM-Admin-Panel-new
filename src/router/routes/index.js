@@ -47,7 +47,7 @@ const Routes = [
   // News
   {
     path: "/AddNews",
-    element: <AddNews />
+    element: <AddNews />,
   },
   {
     path: "/home",
