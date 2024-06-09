@@ -16,6 +16,13 @@ const WizardHorizontal = () => {
 
   // ** State
   const [stepper, setStepper] = useState(null);
+  const [active, setActive] = useState("1");
+
+  const toggle = (tab) => {
+    if (active !== tab) {
+      setActive(tab);
+    }
+  };
 
   const steps = [
     {
@@ -42,12 +49,6 @@ const WizardHorizontal = () => {
       subtitle: "توضیحات را وارد کنید",
       content: <SocialLinks stepper={stepper} />,
     },
-    // {
-    //   id: "course-tec",
-    //   title: "تکنولوژی های دوره",
-    //   subtitle: "تکنولوژی ها را وارد کنید",
-    //   content: <SocialLinks stepper={stepper} />,
-    // },
   ];
 
   return (
