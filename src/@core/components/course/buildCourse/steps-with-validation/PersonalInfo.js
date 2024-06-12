@@ -193,7 +193,12 @@ const PersonalInfo = ({ stepper }) => {
           </div>
         </Row>
         <div className="d-flex justify-content-between">
-          <Button color="secondary" className="btn-prev" outline disabled>
+          <Button
+            color="secondary"
+            className="btn-prev"
+            outline
+            onClick={() => stepper.previous()}
+          >
             <ArrowLeft
               size={14}
               className="align-middle me-sm-25 me-0"
