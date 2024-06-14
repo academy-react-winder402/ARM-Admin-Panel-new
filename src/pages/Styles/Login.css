@@ -1,0 +1,37 @@
+.Error {
+  -webkit-animation: scale-down-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: scale-down-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  font-size: 14px;
+  width: 320px;
+  color: red;
+  position: absolute;
+  margin-right: 100px;
+  margin-top: 3px;
+}
+
+/* Animations: */
+@keyframes scale-down-center {
+  0% {
+    -webkit-transform: scale(2);
+    transform: scale(2);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+.CustomInput {
+  display: flex;
+  flex-flow: column;
+  position: relative;
+}
+
+.CustomInput > input {
+  height: 35px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  font-size: 16px;
+  text-indent: 10px;
+}

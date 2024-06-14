@@ -1,6 +1,11 @@
+import "./Styles/Login.css";
+
 // ** React Imports
 import { useSkin } from "@hooks/useSkin";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { loginAPI } from "../@core/services/api/auth";
 
 // ** Icons Imports
 import { Facebook, Twitter, Mail, GitHub } from "react-feather";
@@ -14,7 +19,6 @@ import {
   Col,
   CardTitle,
   CardText,
-  Form,
   Label,
   Input,
   Button,
@@ -26,11 +30,45 @@ import illustrationsDark from "@src/assets/images/pages/login-v2-dark.svg";
 
 // ** Styles
 import "@styles/react/pages/page-authentication.scss";
+import { setItem } from "../@core/services/common/storage.services";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { skin } = useSkin();
 
   const source = skin === "dark" ? illustrationsDark : illustrationsLight;
+
+  const navigate = useNavigate();
+  const validation = yup.object({
+    phoneOrGmail: yup
+      .string()
+      .required("ایمیل یا شماره همراه خود را وارد کنید" + " * "),
+    password: yup.string().required("رمز عبور الزامیست" + " * "),
+  });
+
+  const LogInUser = async (userObj) => {
+    const user = await loginAPI(userObj);
+
+    if (user.success) {
+      if (
+        user.roles.includes("Administrator") ||
+        user.roles.includes("Teachers")
+      ) {
+        toast.success("ورود با موفقیت انجام شد");
+        setItem("token", user.token);
+        navigate("/");
+      } else {
+        toast.error("شما دسترسی مورد نیاز را ندارید");
+      }
+    } else {
+      toast.error("اطلاعات حساب کاربری یا رمز عبور نادست است");
+    }
+  };
+
+  const onSubmit = (values) => {
+    console.log(values);
+    LogInUser(values);
+  };
 
   return (
     <div className="auth-wrapper auth-cover" dir="rtl">
@@ -50,50 +88,69 @@ const Login = () => {
               به پنل مدیریت خوش آمدید ! 👋
             </CardTitle>
             <CardText className="mb-2">لطفا برای ادامه کار وارد شوید</CardText>
-            <Form
-              className="auth-login-form mt-2"
-              onSubmit={(e) => e.preventDefault()}
+
+            <Formik
+              initialValues={{
+                phoneOrGmail: "",
+                password: "",
+                rememberMe: true,
+              }}
+              onSubmit={onSubmit}
+              validationSchema={validation}
             >
-              <div className="mb-1">
-                <Label
-                  className="form-label"
-                  for="login-email"
-                  style={{ fontSize: "20px" }}
-                >
-                  ایمیل
-                </Label>
-                <Input
-                  type="email"
-                  id="login-email"
-                  placeholder="ایمیل یا شماره موبایل خود را وارد کنید"
-                  autoFocus
-                />
-              </div>
-              <div className="mb-1">
-                <Label
-                  className="form-label"
-                  for="login-email"
-                  style={{ fontSize: "20px" }}
-                >
-                  رمز عبور
-                </Label>
-                <Input
-                  type="email"
-                  id="login-email"
-                  placeholder="رمز عبور خود را وارد کنید"
-                  autoFocus
-                />
-              </div>
-              <div className="form-check mb-1">
-                <Input type="checkbox" id="remember-me" />
-                <Label className="form-check-label" for="remember-me">
-                  مرا به خاطر بسپار
-                </Label>
-              </div>
-              <Button type="submit" color="primary" block>
-                ورود
-              </Button>
-            </Form>
+              <Form className="auth-login-form mt-2">
+                <div className="mb-1 CustomInput">
+                  <Label
+                    className="form-label"
+                    for="login-email"
+                    style={{ fontSize: "20px" }}
+                  >
+                    ایمیل
+                  </Label>
+                  <Field
+                    id="phoneOrGmail"
+                    name="phoneOrGmail"
+                    placeholder="ایمیل یا شماره موبایل خود را وارد کنید"
+                    autoFocus
+                  />
+                  <ErrorMessage
+                    name="phoneOrGmail"
+                    component={"span"}
+                    className="Error"
+                  />
+                </div>
+                <div className="mb-1 CustomInput">
+                  <Label
+                    className="form-label"
+                    for="login-email"
+                    style={{ fontSize: "20px" }}
+                  >
+                    رمز عبور
+                  </Label>
+                  <Field
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="رمز عبور خود را وارد کنید"
+                    autoFocus
+                  />
+                  <ErrorMessage
+                    name="password"
+                    component={"span"}
+                    className="Error"
+                  />
+                </div>
+                <div className="form-check mb-1">
+                  <Input type="checkbox" id="rememberMe" name="rememberMe" />
+                  <Label className="form-check-label" for="remember-me">
+                    مرا به خاطر بسپار
+                  </Label>
+                </div>
+                <Button type="submit" color="primary" block>
+                  ورود
+                </Button>
+              </Form>
+            </Formik>
           </Col>
         </Col>
       </Row>
