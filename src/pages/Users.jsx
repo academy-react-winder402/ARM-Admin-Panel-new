@@ -56,7 +56,7 @@ const Users = () => {
 
       setData(getUserLists);
     } catch (error) {
-      toast.error("مشکلی در دریافت کاربران به وجود آمد !");
+      return error;
     }
   };
 

@@ -32,7 +32,20 @@ import "@styles/react/libs/tables/react-dataTable-component.scss";
 import { Link } from "react-router-dom";
 
 // ** Table Header
-const CustomHeader = ({ handlePerPage, rowsOfPage, handleFilter, query }) => {
+const CustomHeader = ({
+  handlePerPage,
+  rowsOfPage,
+  handleFilter,
+  query,
+  currentRole,
+  setCurrentRole,
+}) => {
+  const roleOptions = [
+    { value: "", label: "انتخاب نقش" },
+    { value: 5, label: "دانشجو" },
+    { value: 2, label: "استاد" },
+    { value: 1, label: "مدیر" },
+  ];
   return (
     <div className="invoice-list-table-header w-100 me-1 ms-50 mt-2 mb-75">
       <Row>
@@ -53,6 +66,18 @@ const CustomHeader = ({ handlePerPage, rowsOfPage, handleFilter, query }) => {
               <option value="62">62</option>
             </Input>
           </div>
+        </Col>
+        <Col xl="2">
+          <Label for="role-select">نقش</Label>
+          <Select
+            isClearable={false}
+            value={currentRole}
+            options={roleOptions}
+            className="react-select"
+            classNamePrefix="select"
+            theme={selectThemeColors}
+            onChange={(data) => setCurrentRole(data)}
+          />
         </Col>
         <Col
           xl="6"
@@ -103,12 +128,6 @@ const UsersListTable = ({
   setCurrentStatus,
 }) => {
   // ** User filter options
-  const roleOptions = [
-    { value: "", label: "انتخاب نقش" },
-    { value: 5, label: "دانشجو" },
-    { value: 2, label: "استاد" },
-    { value: 1, label: "مدیر" },
-  ];
 
   const statusOptions = [
     { value: "", label: "انتخاب وضعیت" },
@@ -194,18 +213,6 @@ const UsersListTable = ({
         <CardBody>
           <Row>
             <Col md="4">
-              <Label for="role-select">نقش</Label>
-              <Select
-                isClearable={false}
-                value={currentRole}
-                options={roleOptions}
-                className="react-select"
-                classNamePrefix="select"
-                theme={selectThemeColors}
-                onChange={(data) => setCurrentRole(data)}
-              />
-            </Col>
-            <Col md="4">
               <Label for="status-select">وضعیت</Label>
               <Select
                 theme={selectThemeColors}
@@ -241,6 +248,8 @@ const UsersListTable = ({
                 rowsOfPage={rowsOfPage}
                 handleFilter={handleFilter}
                 handlePerPage={handlePerPage}
+                currentRole={currentRole}
+                setCurrentRole={setCurrentRole}
                 users={users}
               />
             }
