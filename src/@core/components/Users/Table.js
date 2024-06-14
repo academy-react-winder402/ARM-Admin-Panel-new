@@ -39,6 +39,8 @@ const CustomHeader = ({
   query,
   currentRole,
   setCurrentRole,
+  currentStatus,
+  setCurrentStatus,
 }) => {
   const roleOptions = [
     { value: "", label: "انتخاب نقش" },
@@ -46,10 +48,15 @@ const CustomHeader = ({
     { value: 2, label: "استاد" },
     { value: 1, label: "مدیر" },
   ];
+  const statusOptions = [
+    { value: "", label: "انتخاب وضعیت" },
+    { value: true, label: "کاربران فعال" },
+    { value: false, label: "کاربران غیر فعال" },
+  ];
   return (
     <div className="invoice-list-table-header w-100 me-1 ms-50 mt-2 mb-75">
       <Row>
-        <Col xl="6" className="d-flex align-items-center p-0">
+        <Col xl="2" className="d-flex align-items-center p-0">
           <div className="d-flex align-items-center w-100">
             <label htmlFor="rows-per-page">تعداد در صفحه</label>
             <Input
@@ -67,7 +74,7 @@ const CustomHeader = ({
             </Input>
           </div>
         </Col>
-        <Col xl="2">
+        <Col xl="2" className="d-flex align-items-center p-0">
           <Label for="role-select">نقش</Label>
           <Select
             isClearable={false}
@@ -77,6 +84,18 @@ const CustomHeader = ({
             classNamePrefix="select"
             theme={selectThemeColors}
             onChange={(data) => setCurrentRole(data)}
+          />
+        </Col>
+        <Col xl="2" className="d-flex align-items-center p-0">
+          <Label for="status-select">وضعیت</Label>
+          <Select
+            theme={selectThemeColors}
+            isClearable={false}
+            className="react-select"
+            classNamePrefix="select"
+            options={statusOptions}
+            value={currentStatus}
+            onChange={(data) => setCurrentStatus(data)}
           />
         </Col>
         <Col
@@ -127,14 +146,6 @@ const UsersListTable = ({
   setCurrentRole,
   setCurrentStatus,
 }) => {
-  // ** User filter options
-
-  const statusOptions = [
-    { value: "", label: "انتخاب وضعیت" },
-    { value: true, label: "کاربران فعال" },
-    { value: false, label: "کاربران غیر فعال" },
-  ];
-
   // ** Function in get data on page change
   const handlePagination = (page) => {
     setCurrentPage(page.selected + 1);
@@ -211,20 +222,7 @@ const UsersListTable = ({
           <CardTitle tag="h4">فیلتر ها</CardTitle>
         </CardHeader>
         <CardBody>
-          <Row>
-            <Col md="4">
-              <Label for="status-select">وضعیت</Label>
-              <Select
-                theme={selectThemeColors}
-                isClearable={false}
-                className="react-select"
-                classNamePrefix="select"
-                options={statusOptions}
-                value={currentStatus}
-                onChange={(data) => setCurrentStatus(data)}
-              />
-            </Col>
-          </Row>
+          <Row></Row>
         </CardBody>
       </Card>
       <Card className="overflow-hidden">
@@ -250,6 +248,8 @@ const UsersListTable = ({
                 handlePerPage={handlePerPage}
                 currentRole={currentRole}
                 setCurrentRole={setCurrentRole}
+                currentStatus={currentStatus}
+                setCurrentStatus={setCurrentStatus}
                 users={users}
               />
             }
