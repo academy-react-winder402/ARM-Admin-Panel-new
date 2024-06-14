@@ -2,7 +2,7 @@
 import { forwardRef, Fragment } from "react";
 
 // ** Table Columns
-import { USER_COLUMNS } from "./user-columns";
+import { userCol } from "./user-columns";
 
 // ** Third Party Components
 import DataTable from "react-data-table-component";
@@ -74,29 +74,27 @@ const CustomHeader = ({
             </Input>
           </div>
         </Col>
-        <Col xl="2" className="d-flex align-items-center p-0">
-          <Label for="role-select">نقش</Label>
-          <Select
-            isClearable={false}
-            value={currentRole}
-            options={roleOptions}
-            className="react-select"
-            classNamePrefix="select"
-            theme={selectThemeColors}
-            onChange={(data) => setCurrentRole(data)}
-          />
-        </Col>
-        <Col xl="2" className="d-flex align-items-center p-0">
-          <Label for="status-select">وضعیت</Label>
-          <Select
-            theme={selectThemeColors}
-            isClearable={false}
-            className="react-select"
-            classNamePrefix="select"
-            options={statusOptions}
-            value={currentStatus}
-            onChange={(data) => setCurrentStatus(data)}
-          />
+        <Col xl="4" className="d-flex align-items-center p-0">
+          <div className="d-flex gap-1">
+            <Select
+              theme={selectThemeColors}
+              isClearable={false}
+              className="react-select"
+              classNamePrefix="select"
+              options={statusOptions}
+              value={currentStatus}
+              onChange={(data) => setCurrentStatus(data)}
+            />
+            <Select
+              isClearable={false}
+              value={currentRole}
+              options={roleOptions}
+              className="react-select"
+              classNamePrefix="select"
+              theme={selectThemeColors}
+              onChange={(data) => setCurrentRole(data)}
+            />
+          </div>
         </Col>
         <Col
           xl="6"
@@ -217,14 +215,6 @@ const UsersListTable = ({
 
   return (
     <Fragment>
-      <Card>
-        <CardHeader>
-          <CardTitle tag="h4">فیلتر ها</CardTitle>
-        </CardHeader>
-        <CardBody>
-          <Row></Row>
-        </CardBody>
-      </Card>
       <Card className="overflow-hidden">
         <div className="react-dataTable">
           <DataTable
@@ -234,7 +224,7 @@ const UsersListTable = ({
             pagination
             responsive
             paginationServer
-            columns={USER_COLUMNS}
+            columns={userCol}
             onSort={handleSort}
             sortIcon={<ChevronDown />}
             className="react-dataTable"

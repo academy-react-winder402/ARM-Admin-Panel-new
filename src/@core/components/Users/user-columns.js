@@ -115,7 +115,7 @@ const statusObj = {
   False: "light-warning",
 };
 
-export const USER_COLUMNS = [
+export const userCol = [
   {
     name: "کاربر",
     sortable: true,
@@ -130,11 +130,7 @@ export const USER_COLUMNS = [
             to={`/users/${row.id}`}
             className="user_name text-truncate text-body"
           >
-            <span className="fw-bolder">
-              {row.fname && row.lname
-                ? row.fname + " " + row.lname
-                : "کاربر نابغه"}
-            </span>
+            <span className="fw-bolder">{row.fname + " " + row.lname}</span>
           </Link>
           <small className="text-truncate text-muted mb-0">{row.gmail}</small>
         </div>
