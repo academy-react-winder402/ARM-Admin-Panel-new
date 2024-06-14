@@ -28,7 +28,7 @@ const DefaultRoute = "/home";
 
 const Home = lazy(() => import("../../pages/Home"));
 const Yourlist = lazy(() => import("../../pages/course/YourList"));
-const MembersList = lazy(() => import("../../pages/Members/Members"));
+const MembersList = lazy(() => import("../../pages/Users.jsx"));
 const ListOfCourse = lazy(() => import("../../pages/course/ListOfCourse"));
 const BuildCourse = lazy(() => import("../../pages/course/BuildCourse"));
 const ReserveList = lazy(() => import("../../pages/course/ReserveList"));
