@@ -6,7 +6,7 @@ import { USER_COLUMNS } from "./user-columns";
 
 // ** Third Party Components
 import DataTable from "react-data-table-component";
-import { ChevronDown, FileText, Share } from "react-feather";
+import { ChevronDown } from "react-feather";
 import ReactPaginate from "react-paginate";
 import Select from "react-select";
 
@@ -21,13 +21,9 @@ import {
   CardHeader,
   CardTitle,
   Col,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
   Input,
   Label,
   Row,
-  UncontrolledDropdown,
 } from "reactstrap";
 
 // ** Styles
@@ -51,10 +47,10 @@ const CustomHeader = ({ handlePerPage, rowsOfPage, handleFilter, query }) => {
               onChange={handlePerPage}
               style={{ width: "5rem" }}
             >
-              <option value="10">10</option>
-              <option value="25">25</option>
-              <option value="50">50</option>
-              <option value="100">100</option>
+              <option value="8">8</option>
+              <option value="12">12</option>
+              <option value="24">24</option>
+              <option value="62">62</option>
             </Input>
           </div>
         </Col>
@@ -248,7 +244,7 @@ const UsersListTable = ({
                 users={users}
               />
             }
-            noDataComponent={<span className="my-2">کاربری پیدا نشد !</span>}
+            noDataComponent={<span className="my-2">کاربری یافت نشد !</span>}
           />
         </div>
       </Card>

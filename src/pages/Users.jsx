@@ -28,7 +28,7 @@ const Users = () => {
   const [teachers, setTeachers] = useState();
   const [admins, setAdmins] = useState();
   const [currentPage, setCurrentPage] = useState();
-  const [rowsOfPage, setRowsOfPage] = useState(10);
+  const [rowsOfPage, setRowsOfPage] = useState(8);
   const [query, setQuery] = useState();
   const [sortingCol, setSortingCol] = useState("DESC");
   const [sortType, setSortType] = useState();
