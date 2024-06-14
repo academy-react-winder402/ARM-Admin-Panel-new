@@ -36,57 +36,7 @@ import "@styles/react/libs/tables/react-dataTable-component.scss";
 import { Link } from "react-router-dom";
 
 // ** Table Header
-const CustomHeader = ({
-  handlePerPage,
-  rowsOfPage,
-  handleFilter,
-  query,
-  users,
-}) => {
-  // ** Converts table to CSV
-  function convertArrayOfObjectsToCSV(array) {
-    let result;
-
-    const columnDelimiter = ",";
-    const lineDelimiter = "\n";
-    const keys = Object.keys(users?.listUser[0]);
-
-    result = "";
-    result += keys.join(columnDelimiter);
-    result += lineDelimiter;
-
-    array.listUser.forEach((item) => {
-      let ctr = 0;
-      keys.forEach((key) => {
-        if (ctr > 0) result += columnDelimiter;
-
-        result += item[key];
-
-        ctr++;
-      });
-      result += lineDelimiter;
-    });
-
-    return result;
-  }
-
-  // ** Downloads CSV
-  function downloadCSV(array) {
-    const link = document.createElement("a");
-    let csv = convertArrayOfObjectsToCSV(array);
-    if (csv === null) return;
-
-    const filename = "export.csv";
-
-    if (!csv.match(/^data:text\/csv/i)) {
-      csv = `data:text/csv;charset=utf-8,${csv}`;
-    }
-
-    link.setAttribute("href", encodeURI(csv));
-    link.setAttribute("download", filename);
-    link.click();
-  }
-
+const CustomHeader = ({ handlePerPage, rowsOfPage, handleFilter, query }) => {
   return (
     <div className="invoice-list-table-header w-100 me-1 ms-50 mt-2 mb-75">
       <Row>
@@ -126,13 +76,6 @@ const CustomHeader = ({
           </div>
 
           <div className="d-flex align-items-center table-header-actions">
-            <UncontrolledDropdown className="me-1">
-              <DropdownToggle color="secondary" caret outline>
-                <Share className="font-small-4 me-50" />
-                <span className="align-middle">خروحی</span>
-              </DropdownToggle>
-            </UncontrolledDropdown>
-
             <Button
               tag={Link}
               to="/create-user"
