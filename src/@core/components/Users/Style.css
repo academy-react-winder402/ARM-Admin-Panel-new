@@ -1,0 +1,15 @@
+.btn-primary-DDDD {
+  border-color: #7367f0 !important;
+  background-color: #7367f0 !important;
+  box-shadow: none;
+  margin-right: 1.5rem !important;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  cursor: pointer;
+  border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);
+  border-radius: 10px;
+  color: #fff !important;
+  font-weight: 500;
+}

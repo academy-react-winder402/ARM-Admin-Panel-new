@@ -3,6 +3,9 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
+/* Styles */
+import "./Style.css";
+
 // ** Custom Components
 import Avatar from "@components/avatar";
 import UserAddRole from "./UserAddRole";
@@ -30,83 +33,56 @@ import {
   UncontrolledDropdown,
 } from "reactstrap";
 
-import { deleteUserAPI } from "../../services/api/user/delete-user.api";
+//import { deleteUserAPI } from "../../services/api/user/delete-user.api";
 
-// ** Utils
-import { convertDateToPersian } from "../../services/Utils/date-helper.utils";
+import DateObject from "react-date-object";
+import persian from "react-date-object/calendars/persian";
 
-// ** Renders Client Columns
-const renderClient = (row) => {
-  if (row.pictureAddress) {
-    return (
-      <Avatar
-        className="me-1"
-        img={row.pictureAddress}
-        width="32"
-        height="32"
-      />
-    );
-  } else {
-    return (
-      <Avatar
-        initials
-        className="me-1"
-        color={"light-primary"}
-        content={row.fname + " " + row.lname || "کاربر نابغه"}
-      />
-    );
-  }
-};
+const DateGenerator = (RawDate) => {
+  var date = new DateObject(RawDate);
+  date.convert(persian);
 
-// ** Renders Role Columns
-const renderRole = (row) => {
-  const roleObj = {
-    Administrator: {
-      class: "text-success",
-      icon: Database,
-    },
-    Teacher: {
-      class: "text-info",
-      icon: Edit2,
-    },
-    Student: {
-      class: "text-primary",
-      icon: User,
-    },
-    null: {
-      class: "text-warning",
-      icon: Settings,
-    },
-    admin: {
-      class: "text-danger",
-      icon: Slack,
-    },
-  };
-
-  const Icon = roleObj[row.userRoles] ? roleObj[row.userRoles].icon : Edit2;
-
-  const renderRoleName = () => {
-    if (row.userRoles?.includes("Administrator")) {
-      return "مدیر";
-    } else if (row.userRoles?.includes("Teacher")) {
-      return "استاد";
-    } else if (row.userRoles?.includes("Student")) {
-      return "دانشجو";
-    } else {
-      return "کاربر نابغه";
+  const MonthGenerator = (MonthNumber) => {
+    switch (MonthNumber) {
+      case "01":
+        return "فروردین";
+      case "02":
+        return "اردیبهشت";
+      case "03":
+        return "خرداد";
+      case "04":
+        return "تیر";
+      case "05":
+        return "مرداد";
+      case "06":
+        return "شهریور";
+      case "07":
+        return "مهر";
+      case "08":
+        return "آبان";
+      case "09":
+        return "آذر";
+      case "10":
+        return "دی";
+      case "11":
+        return "بهمن";
+      case "12":
+        return "اسفند";
     }
   };
 
+  const FirstZeroRemover = (text) => {
+    if (text[0] == 0) {
+      return text.slice(1);
+    } else return text;
+  };
+
   return (
-    <span className="text-truncate text-capitalize align-middle">
-      <Icon
-        size={18}
-        className={`${
-          roleObj[row.userRoles] ? roleObj[row.userRoles].class : ""
-        } me-50`}
-      />
-      {renderRoleName()}
-    </span>
+    date.format("YYYY") +
+    " / " +
+    MonthGenerator(date.format("MM")) +
+    " / " +
+    FirstZeroRemover(date.format("DD"))
   );
 };
 
@@ -117,146 +93,141 @@ const statusObj = {
 
 export const userCol = [
   {
-    name: "کاربر",
+    name: "نام",
     sortable: true,
-    minWidth: "300px",
-    sortField: "fname",
-    selector: (row) => row.fullName,
+    width: "300px",
+    sortField: "role",
+    selector: (row) => row.fname,
     cell: (row) => (
-      <div className="d-flex justify-content-left align-items-center">
-        {renderClient(row)}
-        <div className="d-flex flex-column">
-          <Link
-            to={`/users/${row.id}`}
-            className="user_name text-truncate text-body"
+      <div
+        style={{
+          display: "flex",
+          gap: "50px",
+        }}
+      >
+        <Link style={{ width: "fit-content", minWidth: "60px" }} to={"/Home"}>
+          {row.lname ? row.lname : "کاربر"}
+        </Link>
+        <Link to={"/Home"}>{row.fname ? row.fname : "آکادمی سپهر"}</Link>
+      </div>
+    ),
+  },
+  /* {
+    name: "نقش",
+    sortable: true,
+    width: "60px",
+    sortField: "role",
+    selector: (row) => row.userRoles,
+    cell: (row) => (
+      <span
+        style={{ overflow: "hidden", maxHeight: "50px", maxWidth: "100px" }}
+      >
+        {row.userRoles}
+      </span>
+    ),
+  }, */
+  {
+    name: "ایمیل",
+    sortable: true,
+    width: "260px",
+    sortField: "role",
+    selector: (row) => row.gmail,
+    cell: (row) => <span>{row.gmail}</span>,
+  },
+  {
+    name: "شماره موبایل",
+    sortable: true,
+    width: "140px",
+    sortField: "role",
+    selector: (row) => row.phoneNumber,
+    cell: (row) => <span>{row.phoneNumber}</span>,
+  },
+  {
+    name: "تاریخ",
+    sortable: true,
+    width: "150px",
+    sortField: "role",
+    selector: (row) => row.insertDate,
+    cell: (row) => (
+      <span style={{ fontSize: "10px", direction: "rtl" }}>
+        {DateGenerator(row.insertDate)}
+      </span>
+    ),
+  },
+  {
+    name: "وضعیت",
+    sortable: true,
+    width: "120px",
+    sortField: "role",
+    selector: (row) => row.active,
+    cell: (row) => (
+      <>
+        {row.active ? (
+          <span
+            style={{
+              color: "#27BD6B",
+              width: "40px",
+              backgroundColor: "#28424B",
+              textAlign: "center",
+              borderRadius: "10px",
+            }}
           >
-            <span className="fw-bolder">{row.fname + " " + row.lname}</span>
-          </Link>
-          <small className="text-truncate text-muted mb-0">{row.gmail}</small>
-        </div>
+            فعال
+          </span>
+        ) : (
+          <span>غیر فعال</span>
+        )}
+      </>
+    ),
+  },
+
+  {
+    name: "مدیریت",
+    minWidth: "100px",
+    cell: (row) => (
+      <div className="column-action">
+        <UncontrolledDropdown>
+          <DropdownToggle tag="div" className="btn btn-sm">
+            <MoreVertical size={14} className="cursor-pointer" />
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem
+              tag={Link}
+              className="w-100"
+              to={`/apps/user/view/${row.id}`}
+              onClick={() => store.dispatch(getUser(row.id))}
+            >
+              <FileText size={14} className="me-50" />
+              <span className="align-middle">اطلاعات بیشتر</span>
+            </DropdownItem>
+            <DropdownItem
+              tag="a"
+              href="/"
+              className="w-100"
+              onClick={(e) => e.preventDefault()}
+            >
+              <Archive size={14} className="me-50" />
+              <span className="align-middle">ویرایش کاربر</span>
+            </DropdownItem>
+            <DropdownItem
+              tag="a"
+              href="/"
+              className="w-100"
+              onClick={(e) => {
+                e.preventDefault();
+                store.dispatch(deleteUser(row.id));
+              }}
+            >
+              <Trash2 size={14} className="me-50" />
+              <span className="align-middle">حذف کاربر</span>
+            </DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
       </div>
     ),
   },
   {
-    name: "نقش",
-    sortable: true,
-    width: "155px",
-    sortField: "role",
-    selector: (row) => row.role,
-    cell: (row) => renderRole(row),
-  },
-  {
-    name: "شماره موبایل",
-    width: "150px",
-    sortable: true,
-    sortField: "phoneNumber",
-    cell: (row) => <span className="text-capitalize">{row.phoneNumber}</span>,
-  },
-  {
-    name: "تاریخ",
-    width: "130px",
-    sortable: true,
-    sortField: "billing",
-    selector: (row) => row.billing,
-    cell: (row) => {
-      const formattedDate = convertDateToPersian(row.insertDate);
-
-      return <span className="text-capitalize">{formattedDate}</span>;
-    },
-  },
-  {
-    name: "وضعیت",
-    width: "120px",
-    sortable: true,
-    sortField: "active",
-    selector: (row) => row.active,
-    cell: (row) => (
-      <Badge className="text-capitalize" color={statusObj[row.active]} pill>
-        {row.active ? "فعال" : "غیرفعال"}
-      </Badge>
-    ),
-  },
-  {
-    name: "عملیات",
-    minWidth: "240px",
-    cell: (row) => {
-      // ** States
-      const [modal, setModal] = useState(null);
-
-      // ** Hook
-      const navigate = useNavigate();
-
-      // ** Toggle modal function
-      const toggleModal = (id) => {
-        if (modal !== id) {
-          setModal(id);
-        } else {
-          setModal(null);
-        }
-      };
-
-      const handleAddRoleClick = () => {
-        toggleModal(row.id);
-      };
-
-      const handleDeleteUser = async () => {
-        try {
-          const deleteUser = await deleteUserAPI(row.id);
-
-          if (deleteUser.success) {
-            toast.success("کاربر با موفقیت حذف شد !");
-
-            navigate("/users");
-          } else {
-            toast.error("مشکلی در حذف کاربر به وجود آمد !");
-          }
-        } catch (error) {
-          toast.error("مشکلی در حذف کاربر به وجود آمد !");
-        }
-      };
-
-      return (
-        <div className="d-flex gap-1">
-          <div className="column-action">
-            <UncontrolledDropdown direction="right">
-              <DropdownToggle tag="div" className="btn btn-sm" caret>
-                <MoreVertical size={14} className="cursor-pointer" />
-              </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem
-                  tag={Link}
-                  className="w-100"
-                  to={`/users/${row.id}`}
-                >
-                  <FileText size={14} className="me-50" />
-                  <span className="align-middle">جزئیات</span>
-                </DropdownItem>
-                <DropdownItem
-                  tag={Link}
-                  className="w-100"
-                  to={`/users/edit/${row.id}`}
-                >
-                  <Archive size={14} className="me-50" />
-                  <span className="align-middle">ویرایش</span>
-                </DropdownItem>
-                <DropdownItem className="w-100" onClick={handleDeleteUser}>
-                  <Trash2 size={14} className="me-50" />
-                  <span className="align-middle">حذف</span>
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-          </div>
-          <Button color="primary" size="sm" onClick={handleAddRoleClick}>
-            دسترسی
-          </Button>
-          <UserAddRole
-            modal={modal}
-            id={row.id}
-            toggleModal={toggleModal}
-            userRoles={row.userRoles}
-          />
-        </div>
-      );
-    },
+    minWidth: "130px",
+    cell: (row) => <button className="btn-primary-DDDD">دسترسی</button>,
   },
 ];

@@ -121,16 +121,6 @@ const Users = () => {
         </Col>
         <Col lg="3" sm="6">
           <StatsHorizontal
-            color="danger"
-            statTitle="دانشجویان"
-            icon={<UserPlus size={20} />}
-            renderStats={
-              <h3 className="fw-bolder mb-75">{students?.totalCount || 0}</h3>
-            }
-          />
-        </Col>
-        <Col lg="3" sm="6">
-          <StatsHorizontal
             color="success"
             statTitle="استادان"
             icon={<UserCheck size={20} />}
@@ -146,6 +136,16 @@ const Users = () => {
             icon={<UserX size={20} />}
             renderStats={
               <h3 className="fw-bolder mb-75">{admins?.totalCount || 0}</h3>
+            }
+          />
+        </Col>
+        <Col lg="3" sm="6">
+          <StatsHorizontal
+            color="danger"
+            statTitle="دانشجویان"
+            icon={<UserPlus size={20} />}
+            renderStats={
+              <h3 className="fw-bolder mb-75">{students?.totalCount || 0}</h3>
             }
           />
         </Col>

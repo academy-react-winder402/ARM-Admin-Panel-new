@@ -50,8 +50,8 @@ const CustomHeader = ({
   ];
   const statusOptions = [
     { value: "", label: "انتخاب وضعیت" },
-    { value: true, label: "کاربران فعال" },
-    { value: false, label: "کاربران غیر فعال" },
+    { value: true, label: " فعال" },
+    { value: false, label: " غیر فعال" },
   ];
   return (
     <div className="invoice-list-table-header w-100 me-1 ms-50 mt-2 mb-75">
