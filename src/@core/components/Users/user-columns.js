@@ -1,5 +1,5 @@
 // ** React Imports
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -9,6 +9,13 @@ import "./Style.css";
 // ** Custom Components
 import Avatar from "@components/avatar";
 import UserAddRole from "./UserAddRole";
+import RoleCards from "../roles-permissions/roles/RoleCards";
+
+// ** Avatars
+import StudentAvatar from "../../assets/images/avatars/Student.png";
+import AdminAvatar from "../../assets/images/avatars/Admin.png";
+import TeacherAvatar from "../../assets/images/avatars/Teacher.png";
+import BlankAvatar from "../../assets/images/avatars/avatar-blank.png";
 
 // ** Icons Imports
 import {
@@ -86,58 +93,91 @@ const DateGenerator = (RawDate) => {
   );
 };
 
-const statusObj = {
-  True: "light-success",
-  False: "light-warning",
+const RoleGenerator = ({ Roles }) => {
+  var data = [
+    {
+      title: "Administrator",
+      users: [],
+    },
+  ];
+
+  if (typeof Roles == "string") {
+    let Student = Roles.indexOf("Student");
+    let Admin = Roles.indexOf("Administrator");
+    let Teacher = Roles.indexOf("Teacher");
+    Student != -1 &&
+      data[0].users.push({
+        size: "md",
+        title: "دانش آموز",
+        img: StudentAvatar,
+      });
+    Admin != -1 &&
+      data[0].users.push({
+        size: "md",
+        title: "ادمین",
+        img: AdminAvatar,
+      });
+    Teacher != -1 &&
+      data[0].users.push({
+        size: "md",
+        title: "استاد",
+        img: TeacherAvatar,
+      });
+  }
+  if (Roles == null) {
+    data[0].users.push({
+      size: "md",
+      title: "کاربر ساده",
+      img: BlankAvatar,
+    });
+  }
+  return <RoleCards data={data} />;
 };
 
 export const userCol = [
   {
     name: "نام",
     sortable: true,
-    width: "300px",
+    width: "290px",
+
     sortField: "role",
-    selector: (row) => row.fname,
+    //selector: (row) => row.fname,
     cell: (row) => (
-      <div
-        style={{
-          display: "flex",
-          gap: "50px",
-        }}
-      >
-        <Link style={{ width: "fit-content", minWidth: "60px" }} to={"/Home"}>
-          {row.lname ? row.lname : "کاربر"}
-        </Link>
-        <Link to={"/Home"}>{row.fname ? row.fname : "آکادمی سپهر"}</Link>
+      <div>
+        <div
+          style={{
+            display: "flex",
+            gap: "5px",
+          }}
+        >
+          <Link to={"/Home"} style={{ fontSize: "15px" }}>
+            {row.fname ? row.fname : "کاربر"}{" "}
+            {row.lname ? row.lname : " آکادمی سپهر "}
+          </Link>
+        </div>
+        <span style={{ fontSize: "10px" }}>{row.gmail}</span>
       </div>
     ),
   },
-  /* {
+  {
     name: "نقش",
     sortable: true,
-    width: "60px",
+    width: "150px",
     sortField: "role",
     selector: (row) => row.userRoles,
     cell: (row) => (
       <span
         style={{ overflow: "hidden", maxHeight: "50px", maxWidth: "100px" }}
       >
-        {row.userRoles}
+        <RoleGenerator Roles={row.userRoles} />
       </span>
     ),
-  }, */
-  {
-    name: "ایمیل",
-    sortable: true,
-    width: "260px",
-    sortField: "role",
-    selector: (row) => row.gmail,
-    cell: (row) => <span>{row.gmail}</span>,
   },
+
   {
     name: "شماره موبایل",
     sortable: true,
-    width: "140px",
+    width: "160px",
     sortField: "role",
     selector: (row) => row.phoneNumber,
     cell: (row) => <span>{row.phoneNumber}</span>,

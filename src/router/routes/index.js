@@ -28,7 +28,11 @@ const DefaultRoute = "/home";
 
 const Home = lazy(() => import("../../pages/Home"));
 const Yourlist = lazy(() => import("../../pages/course/YourList"));
+
+/* Member pages*/
 const MembersList = lazy(() => import("../../pages/Users.jsx"));
+const MemberDetail = lazy(() => import("../../pages/profile/index.js"));
+
 const ListOfCourse = lazy(() => import("../../pages/course/ListOfCourse"));
 const BuildCourse = lazy(() => import("../../pages/course/BuildCourse"));
 const ReserveList = lazy(() => import("../../pages/course/ReserveList"));
@@ -49,6 +53,10 @@ const Routes = [
   {
     path: "/Users",
     element: <MembersList />,
+  },
+  {
+    path: "/Users/Detail",
+    element: <MemberDetail />,
   },
 
   // News

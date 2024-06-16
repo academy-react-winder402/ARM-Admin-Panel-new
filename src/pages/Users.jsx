@@ -20,6 +20,8 @@ import { getUserListsAPI } from "../@core/services/api/user/get-user-lists.api";
 
 // ** Styles
 import "@styles/react/apps/app-users.scss";
+//import CountUp from "react-countup/build/CountUp";
+import { CountUp } from "use-count-up";
 
 const Users = () => {
   const [allUsers, setAllUsers] = useState();
@@ -108,14 +110,21 @@ const Users = () => {
           { title: "لیست کاربران" },
         ]}
       />
-      <Row>
+
+      <Row style={{ fontFamily: "IransnsNumber" }}>
         <Col lg="3" sm="6">
           <StatsHorizontal
             color="primary"
             statTitle="همه کاربران"
             icon={<User size={20} />}
             renderStats={
-              <h3 className="fw-bolder mb-75">{allUsers?.totalCount || 0}</h3>
+              <h1 className="fw-bolder mb-75">
+                <CountUp
+                  isCounting
+                  end={allUsers?.totalCount || 0}
+                  duration={3.2}
+                />
+              </h1>
             }
           />
         </Col>
@@ -125,7 +134,13 @@ const Users = () => {
             statTitle="استادان"
             icon={<UserCheck size={20} />}
             renderStats={
-              <h3 className="fw-bolder mb-75">{teachers?.totalCount || 0}</h3>
+              <h1 className="fw-bolder mb-75">
+                <CountUp
+                  isCounting
+                  end={teachers?.totalCount || 0}
+                  duration={3}
+                />
+              </h1>
             }
           />
         </Col>
@@ -135,7 +150,13 @@ const Users = () => {
             statTitle="مدیران"
             icon={<UserX size={20} />}
             renderStats={
-              <h3 className="fw-bolder mb-75">{admins?.totalCount || 0}</h3>
+              <h1 className="fw-bolder mb-75">
+                <CountUp
+                  isCounting
+                  end={admins?.totalCount || 0}
+                  duration={3}
+                />
+              </h1>
             }
           />
         </Col>
@@ -145,11 +166,18 @@ const Users = () => {
             statTitle="دانشجویان"
             icon={<UserPlus size={20} />}
             renderStats={
-              <h3 className="fw-bolder mb-75">{students?.totalCount || 0}</h3>
+              <h1 className="fw-bolder mb-75">
+                <CountUp
+                  isCounting
+                  end={students?.totalCount || 0}
+                  duration={3}
+                />
+              </h1>
             }
           />
         </Col>
       </Row>
+
       <UsersListTable
         users={userLists}
         rowsOfPage={rowsOfPage}

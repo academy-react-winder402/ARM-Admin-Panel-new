@@ -1,24 +1,24 @@
 @font-face {
   font-family: IranSanse;
-  src: url(../public/Font/IRANSans.ttf);
+  src: url(./public/Font/IRANSans.ttf);
 }
 @font-face {
   font-family: IranSans_Bold;
-  src: url(../public/Font/IRANSans_Bold.ttf);
+  src: url(./public/Font/IRANSans_Bold.ttf);
 }
 @font-face {
   font-family: IranSans_Light;
-  src: url(../public/Font/IRANSans_Light.ttf);
+  src: url(./public/Font/IRANSans_Light.ttf);
 }
 @font-face {
   font-family: IranSans_Medium;
-  src: url(../public/Font/IRANSans_Medium.ttf);
+  src: url(./public/Font/IRANSans_Medium.ttf);
 }
 @font-face {
   font-family: IranSans_UltraLight;
-  src: url(../public/Font/IRANSans_UltraLight.ttf);
+  src: url(./public/Font/IRANSans_UltraLight.ttf);
 }
 @font-face {
   font-family: IransnsNumber;
-  src: url("../public/Font/IRANSansWeb\(FaNum\)_Medium.woff2") format("woff2");
+  src: url("./public/Font/IRANSansWeb\(FaNum\)_Medium.woff2") format("woff2");
 }
