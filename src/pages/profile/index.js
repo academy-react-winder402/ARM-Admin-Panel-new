@@ -7,6 +7,7 @@ import axios from "axios";
 // ** Custom Components
 import UILoader from "@components/ui-loader";
 import Breadcrumbs from "@components/breadcrumbs";
+import GoalOverview from "../../@core/components/ui-elements/cards/analytics/GoalOverview";
 
 // ** Reactstrap Imports
 import { Row, Col, Button } from "reactstrap";
@@ -37,32 +38,45 @@ const Profile = () => {
   }, []);
 
   return (
-    <Fragment>
-      <Breadcrumbs
-        title="Profile"
-        data={[{ title: "Pages" }, { title: "Profile" }]}
-      />
-      {data !== null ? (
-        <div id="user-profile">
-          <Row>
-            <Col sm="12">
-              <ProfileHeader data={data} />
-            </Col>
-          </Row>
-          <section id="profile-info">
+    <>
+      {data.id ? (
+        <Fragment>
+          <Breadcrumbs
+            title="Profile"
+            data={[{ title: "کاربران" }, { title: "پروفایل" }]}
+          />
+          <div id="user-profile">
             <Row>
-              <Col
-                lg={{ size: 3, order: 1 }}
-                sm={{ size: 12 }}
-                xs={{ order: 2 }}
-              >
-                <ProfileAbout data={data} />
+              <Col sm="12">
+                <ProfileHeader data={data} />
               </Col>
             </Row>
-          </section>
-        </div>
+            <section id="profile-info">
+              <Row>
+                <Col
+                  lg={{ size: 3, order: 1 }}
+                  sm={{ size: 12 }}
+                  xs={{ order: 2 }}
+                >
+                  <ProfileAbout data={data} />
+                </Col>
+                <Col
+                  lg={{ size: 6, order: 1 }}
+                  sm={{ size: 12 }}
+                  xs={{ order: 2 }}
+                >
+                  <GoalOverview
+                    percent={data.profileCompletionPercentage}
+                    Completed={data.profileCompletionPercentage * 10}
+                    inProgress={10 - data.profileCompletionPercentage * 10}
+                  />
+                </Col>
+              </Row>
+            </section>
+          </div>
+        </Fragment>
       ) : null}
-    </Fragment>
+    </>
   );
 };
 

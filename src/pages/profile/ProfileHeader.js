@@ -24,12 +24,13 @@ const ProfileHeader = ({ data }) => {
 
   return (
     <Card className="profile-header mb-2">
-      <CardImg
-        style={{ border: "0px", minHeight: "200px" }}
-        src={data.coverImg}
-        //alt="User Profile Image"
-        top
-      />
+      <div
+        style={{
+          border: "0px",
+          minHeight: "200px",
+          borderBottom: "1px solid rgba(174,174,174,0.2)",
+        }}
+      ></div>
       <div className="position-relative">
         <div className="profile-img-container d-flex align-items-center">
           <div className="profile-img">
@@ -68,26 +69,14 @@ const ProfileHeader = ({ data }) => {
               <Nav className="mb-0" pills>
                 <NavItem>
                   <NavLink className="fw-bold" active>
-                    <span className="d-none d-md-block">Feed</span>
+                    <span className="d-none d-md-block">اطلاعات اولیه</span>
                     <Rss className="d-block d-md-none" size={14} />
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className="fw-bold">
-                    <span className="d-none d-md-block">About</span>
+                    <span className="d-none d-md-block">دوره ها</span>
                     <Info className="d-block d-md-none" size={14} />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink className="fw-bold">
-                    <span className="d-none d-md-block">Photos</span>
-                    <Image className="d-block d-md-none" size={14} />
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink className="fw-bold">
-                    <span className="d-none d-md-block">Friends</span>
-                    <Users className="d-block d-md-none" size={14} />
                   </NavLink>
                 </NavItem>
               </Nav>

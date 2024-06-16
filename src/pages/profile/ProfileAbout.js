@@ -24,7 +24,7 @@ const DiActiveBadge = () => {
         color: "#6a040f",
         width: "60px",
         display: "block",
-        backgroundColor: "",
+        backgroundColor: "rgba(235,113,127, 0.6)",
         textAlign: "center",
         borderRadius: "10px",
       }}
@@ -47,6 +47,12 @@ const ProfileAbout = ({ data }) => {
           <CardText>{data.phoneNumber}</CardText>
         </div>
         <div className="mt-2">
+          <h5 className="mb-75">آدرس کاربر :</h5>
+          <CardText>
+            {data.homeAdderess ? data.homeAdderess : "وارد نشده"}
+          </CardText>
+        </div>
+        <div className="mt-2">
           <h5 className="mb-75"> جیمیل :</h5>
           <CardText>{data.gmail}</CardText>
         </div>
@@ -66,6 +72,18 @@ const ProfileAbout = ({ data }) => {
           <h5 className="mb-75"> ورود دومرحله ای :</h5>
           <CardText>
             {data.twoStepAuth ? <ActiveBadge /> : <DiActiveBadge />}
+          </CardText>
+        </div>
+        <div className="mt-2">
+          <h5 className="mb-75">آدرس تلگرام :</h5>
+          <CardText>
+            {data.telegramLink ? data.telegramLink : "وارد نشده"}
+          </CardText>
+        </div>
+        <div className="mt-2">
+          <h5 className="mb-75">آدرس لینکدین :</h5>
+          <CardText>
+            {data.linkdinProfile ? data.linkdinProfile : "وارد نشده"}
           </CardText>
         </div>
       </CardBody>
