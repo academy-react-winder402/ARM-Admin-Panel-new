@@ -22,3 +22,7 @@
   font-family: IransnsNumber;
   src: url("./public/Font/IRANSansWeb\(FaNum\)_Medium.woff2") format("woff2");
 }
+
+.Font-IranNumb {
+  font-family: IransnsNumber;
+}

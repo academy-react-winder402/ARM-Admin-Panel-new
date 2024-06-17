@@ -37,6 +37,8 @@ const Users = () => {
   const [rowsOfPage, setRowsOfPage] = useState(8);
   const [query, setQuery] = useState();
 
+  const [MainFilter, setMainFilter] = useState(1);
+
   const fetchUserLists = async (setData) => {
     try {
       const getUserLists = await getCourseListsAPI(1, rowsOfPage, undefined);
@@ -80,8 +82,10 @@ const Users = () => {
       <Row style={{ fontFamily: "IransnsNumber" }}>
         <Col lg="3" sm="6">
           <StatsHorizontal
-            backgroundColor="rgba(0, 0, 0, 0.133)"
-            onClick={(e) => {}}
+            backgroundColor={MainFilter == 1 && "rgba(0, 0, 0, 0.133)"}
+            onClick={() => {
+              setMainFilter(1);
+            }}
             color="warning"
             statTitle="همه دوره ها"
             icon={<BookOpen size={20} />}
@@ -94,6 +98,10 @@ const Users = () => {
         </Col>
         <Col lg="3" sm="6">
           <StatsHorizontal
+            backgroundColor={MainFilter == 2 && "rgba(0, 0, 0, 0.133)"}
+            onClick={() => {
+              setMainFilter(2);
+            }}
             color="success"
             statTitle="دوره های فعال"
             icon={<BookOpen size={20} />}
@@ -106,6 +114,10 @@ const Users = () => {
         </Col>
         <Col lg="3" sm="6">
           <StatsHorizontal
+            backgroundColor={MainFilter == 3 && "rgba(0, 0, 0, 0.133)"}
+            onClick={() => {
+              setMainFilter(3);
+            }}
             color="danger"
             statTitle="دوره های حذف شده"
             icon={<Trash2 size={20} />}
@@ -118,6 +130,10 @@ const Users = () => {
         </Col>
         <Col lg="3" sm="6">
           <StatsHorizontal
+            backgroundColor={MainFilter == 4 && "rgba(0, 0, 0, 0.133)"}
+            onClick={() => {
+              setMainFilter(4);
+            }}
             color="primary"
             statTitle="دوره های درحال بگذاری"
             icon={<Book size={20} />}

@@ -137,7 +137,9 @@ export const CourseCol = [
     width: "180px",
     sortField: "role",
     //selector: (row) => row.fname,
-    cell: (row) => <p style={{ marginTop: "15px" }}>{row.fullName}</p>,
+    cell: (row) => (
+      <p style={{ marginTop: "15px", fontSize: "15px" }}>{row.fullName}</p>
+    ),
   },
   {
     name: " قیمت دوره ",
@@ -149,7 +151,7 @@ export const CourseCol = [
       <span
         style={{
           marginTop: "5px",
-          fontSize: "18px",
+          fontSize: "14px",
           fontFamily: "IransnsNumber",
         }}
       >

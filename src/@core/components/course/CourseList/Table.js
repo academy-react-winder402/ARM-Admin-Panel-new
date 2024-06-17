@@ -41,16 +41,17 @@ const CustomHeader = ({ handlePerPage, rowsOfPage, handleFilter, query }) => {
             <label htmlFor="rows-per-page">تعداد در صفحه</label>
             <Input
               className="mx-50"
+              bsSize="lg"
               type="select"
               id="rows-per-page"
               value={rowsOfPage}
               onChange={handlePerPage}
               style={{ width: "5rem" }}
             >
-              <option value="8">8</option>
-              <option value="12">12</option>
-              <option value="24">24</option>
-              <option value="62">62</option>
+              <option value="8">۸</option>
+              <option value="12">۱۲</option>
+              <option value="24">۲۴</option>
+              <option value="62">۶۲</option>
             </Input>
           </div>
         </Col>
@@ -134,7 +135,7 @@ const UsersListTable = ({
         previousLinkClassName={"page-link"}
         pageLinkClassName={"page-link"}
         containerClassName={
-          "pagination react-paginate justify-content-end my-2 pe-1"
+          "pagination react-paginate justify-content-end my-2 pe-1 Font-IranNumb"
         }
       />
     );

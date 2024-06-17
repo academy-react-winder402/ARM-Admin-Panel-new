@@ -61,16 +61,17 @@ const CustomHeader = ({
             <label htmlFor="rows-per-page">تعداد در صفحه</label>
             <Input
               className="mx-50"
+              bsSize="lg"
               type="select"
               id="rows-per-page"
               value={rowsOfPage}
               onChange={handlePerPage}
               style={{ width: "5rem" }}
             >
-              <option value="8">8</option>
-              <option value="12">12</option>
-              <option value="24">24</option>
-              <option value="62">62</option>
+              <option value="8">۸</option>
+              <option value="12">۱۲</option>
+              <option value="24">۲۴</option>
+              <option value="62">۶۲</option>
             </Input>
           </div>
         </Col>
@@ -79,7 +80,7 @@ const CustomHeader = ({
             <Select
               theme={selectThemeColors}
               isClearable={false}
-              className="react-select"
+              className="react-select SelectOption_Custom"
               classNamePrefix="select"
               options={statusOptions}
               value={currentStatus}
@@ -89,7 +90,7 @@ const CustomHeader = ({
               isClearable={false}
               value={currentRole}
               options={roleOptions}
-              className="react-select"
+              className="react-select SelectOption_Custom"
               classNamePrefix="select"
               theme={selectThemeColors}
               onChange={(data) => setCurrentRole(data)}

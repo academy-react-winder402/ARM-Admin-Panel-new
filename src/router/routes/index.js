@@ -32,6 +32,8 @@ const MemberDetail = lazy(() => import("../../pages/UserProfile/index.js"));
 
 /* Courses pages */
 const ListOfCourse = lazy(() => import("../../pages/course/Courses.jsx"));
+const CreateCourse = lazy(() => import("../../pages/course/BuildCourse.js"));
+import UserView from "../../@core/components/course/reserveList/UserView.js";
 
 const BuildCourse = lazy(() => import("../../pages/course/BuildCourse"));
 const ReserveList = lazy(() => import("../../pages/course/ReserveList"));
@@ -62,6 +64,14 @@ const Routes = [
   {
     path: "/Courses",
     element: <ListOfCourse />,
+  },
+  {
+    path: "/Courses/AddCourse",
+    element: <CreateCourse />,
+  },
+  {
+    path: "/Courses/Detail",
+    element: <UserView />,
   },
 
   // News
