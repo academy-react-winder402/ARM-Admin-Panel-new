@@ -150,7 +150,7 @@ export const userCol = [
             gap: "5px",
           }}
         >
-          <Link to={"/Home"} style={{ fontSize: "15px" }}>
+          <Link to={`/Users/Detail/${row.id}`} style={{ fontSize: "15px" }}>
             {row.fname ? row.fname : "کاربر"}{" "}
             {row.lname ? row.lname : " آکادمی سپهر "}
           </Link>
@@ -234,8 +234,7 @@ export const userCol = [
             <DropdownItem
               tag={Link}
               className="w-100"
-              to={`/apps/user/view/${row.id}`}
-              onClick={() => store.dispatch(getUser(row.id))}
+              to={`/Users/Detail/${row.id}`}
             >
               <FileText size={14} className="me-50" />
               <span className="align-middle">اطلاعات بیشتر</span>

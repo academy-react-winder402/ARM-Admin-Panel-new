@@ -55,7 +55,7 @@ const Routes = [
     element: <MembersList />,
   },
   {
-    path: "/Users/Detail",
+    path: "/Users/Detail/:id",
     element: <MemberDetail />,
   },
 

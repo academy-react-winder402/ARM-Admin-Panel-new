@@ -16,7 +16,7 @@ import {
   Button,
 } from "reactstrap";
 
-const ProfileHeader = ({ data }) => {
+const ProfileHeader = ({ data, Step, setStep }) => {
   // ** States
   const [isOpen, setIsOpen] = useState(false);
 
@@ -68,13 +68,25 @@ const ProfileHeader = ({ data }) => {
             <div className="profile-tabs d-flex justify-content-between flex-wrap mt-1 mt-md-0">
               <Nav className="mb-0" pills>
                 <NavItem>
-                  <NavLink className="fw-bold" active>
+                  <NavLink
+                    className="fw-bold"
+                    active={Step == 1 ? true : false}
+                    onClick={() => {
+                      setStep(1);
+                    }}
+                  >
                     <span className="d-none d-md-block">اطلاعات اولیه</span>
                     <Rss className="d-block d-md-none" size={14} />
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="fw-bold">
+                  <NavLink
+                    className="fw-bold"
+                    active={Step == 2 ? true : false}
+                    onClick={() => {
+                      setStep(2);
+                    }}
+                  >
                     <span className="d-none d-md-block">دوره ها</span>
                     <Info className="d-block d-md-none" size={14} />
                   </NavLink>
