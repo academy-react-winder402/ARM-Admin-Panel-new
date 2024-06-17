@@ -7,8 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Style.css";
 
 // ** Custom Components
-import Avatar from "@components/avatar";
-import UserAddRole from "./UserAddRole";
 import RoleCards from "../roles-permissions/roles/RoleCards";
 
 // ** Avatars

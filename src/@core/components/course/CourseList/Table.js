@@ -2,7 +2,7 @@
 import { forwardRef, Fragment } from "react";
 
 // ** Table Columns
-import { userCol } from "./user-columns";
+import { CourseCol } from "./user-columns";
 
 // ** Third Party Components
 import DataTable from "react-data-table-component";
@@ -32,27 +32,7 @@ import "@styles/react/libs/tables/react-dataTable-component.scss";
 import { Link } from "react-router-dom";
 
 // ** Table Header
-const CustomHeader = ({
-  handlePerPage,
-  rowsOfPage,
-  handleFilter,
-  query,
-  currentRole,
-  setCurrentRole,
-  currentStatus,
-  setCurrentStatus,
-}) => {
-  const roleOptions = [
-    { value: "", label: "انتخاب نقش" },
-    { value: 5, label: "دانشجو" },
-    { value: 2, label: "استاد" },
-    { value: 1, label: "مدیر" },
-  ];
-  const statusOptions = [
-    { value: "", label: "انتخاب وضعیت" },
-    { value: true, label: " فعال" },
-    { value: false, label: " غیر فعال" },
-  ];
+const CustomHeader = ({ handlePerPage, rowsOfPage, handleFilter, query }) => {
   return (
     <div className="invoice-list-table-header w-100 me-1 ms-50 mt-2 mb-75">
       <Row>
@@ -74,30 +54,8 @@ const CustomHeader = ({
             </Input>
           </div>
         </Col>
-        <Col xl="4" className="d-flex align-items-center p-0">
-          <div className="d-flex gap-1">
-            <Select
-              theme={selectThemeColors}
-              isClearable={false}
-              className="react-select"
-              classNamePrefix="select"
-              options={statusOptions}
-              value={currentStatus}
-              onChange={(data) => setCurrentStatus(data)}
-            />
-            <Select
-              isClearable={false}
-              value={currentRole}
-              options={roleOptions}
-              className="react-select"
-              classNamePrefix="select"
-              theme={selectThemeColors}
-              onChange={(data) => setCurrentRole(data)}
-            />
-          </div>
-        </Col>
         <Col
-          xl="6"
+          xl="10"
           className="d-flex align-items-sm-center justify-content-xl-end justify-content-start flex-xl-nowrap flex-wrap flex-sm-row flex-column pe-xl-1 p-0 mt-xl-0 mt-1"
         >
           <div className="d-flex align-items-center mb-sm-0 mb-1 me-1">
@@ -121,7 +79,7 @@ const CustomHeader = ({
               className="add-new-user"
               color="primary"
             >
-              افزودن کاربر
+              افزودن دوره
             </Button>
           </div>
         </Col>
@@ -135,15 +93,9 @@ const UsersListTable = ({
   rowsOfPage,
   currentPage,
   query,
-  currentRole,
-  currentStatus,
   setRowsOfPage,
   setCurrentPage,
   setQuery,
-  setSortingCol,
-  setSortType,
-  setCurrentRole,
-  setCurrentStatus,
 }) => {
   // ** Function in get data on page change
   const handlePagination = (page) => {
@@ -191,8 +143,6 @@ const UsersListTable = ({
   // ** Table data to render
   const dataToRender = () => {
     const filters = {
-      role: currentRole.value,
-      status: currentStatus.value,
       query,
     };
 
@@ -205,13 +155,8 @@ const UsersListTable = ({
     } else if (users?.totalCount === 0 && isFiltered) {
       return [];
     } else {
-      return users?.listUser.slice(0, rowsOfPage);
+      return users?.courseDtos.slice(0, rowsOfPage);
     }
-  };
-
-  const handleSort = (column, sortDirection) => {
-    setSortType(column.sortField);
-    setSortingCol(sortDirection);
   };
 
   return (
@@ -225,8 +170,7 @@ const UsersListTable = ({
             pagination
             responsive
             paginationServer
-            columns={userCol}
-            onSort={handleSort}
+            columns={CourseCol}
             sortIcon={<ChevronDown />}
             className="react-dataTable"
             paginationComponent={CustomPagination}
@@ -237,10 +181,6 @@ const UsersListTable = ({
                 rowsOfPage={rowsOfPage}
                 handleFilter={handleFilter}
                 handlePerPage={handlePerPage}
-                currentRole={currentRole}
-                setCurrentRole={setCurrentRole}
-                currentStatus={currentStatus}
-                setCurrentStatus={setCurrentStatus}
                 users={users}
               />
             }

@@ -28,6 +28,7 @@ import "@styles/react/pages/page-profile.scss";
 /* Api */
 import { GetUserDetail } from "../../@core/services/api/UserDetail/GetUserDetail";
 import { useParams } from "react-router-dom";
+import BreadCrumbs from "../../@core/components/breadcrumbs";
 
 const Profile = () => {
   // ** States
@@ -49,9 +50,12 @@ const Profile = () => {
     <>
       {data.id ? (
         <Fragment>
-          <Breadcrumbs
-            title="Profile"
-            data={[{ title: "کاربران" }, { title: "پروفایل" }]}
+          <BreadCrumbs
+            title="پروفایل کاربری"
+            data={[
+              { title: "مدیریت کاربران ", link: "/users " },
+              { title: data.lName + " " + data.fName },
+            ]}
           />
           <div id="user-profile">
             <Row>

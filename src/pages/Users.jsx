@@ -105,10 +105,7 @@ const Users = () => {
     <div className="app-user-list">
       <BreadCrumbs
         title="لیست کاربران آکادمی سپهر"
-        data={[
-          { title: "مدیریت کاربران", link: "/users" },
-          { title: "لیست کاربران" },
-        ]}
+        data={[{ title: "مدیریت کاربران" }]}
       />
 
       <Row style={{ fontFamily: "IransnsNumber" }}>
