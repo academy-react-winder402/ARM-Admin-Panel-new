@@ -24,7 +24,6 @@ import CourseBlank from "../../../assets/images/avatars/Course-Blank.png";
 
 // ** Reactstrap Imports
 import {
-  Badge,
   Button,
   DropdownItem,
   DropdownMenu,
@@ -37,44 +36,7 @@ import {
   ActiveDeActiveCourseAPI,
   DeleteRestoreCourseAPI,
 } from "../../../services/api/Course/Courses";
-
-const ActiveBadge = ({ innerHtml }) => {
-  return (
-    <span
-      style={{
-        color: "#27BD6B",
-        paddingLeft: "10px",
-        paddingRight: "10px",
-        display: "block",
-        backgroundColor: "#28424B",
-        textAlign: "center",
-        borderRadius: "10px",
-        // marginRight: "13px",
-      }}
-    >
-      {innerHtml}
-    </span>
-  );
-};
-
-const DiActiveBadge = ({ innerHtml }) => {
-  return (
-    <span
-      style={{
-        color: "#B2474F",
-        display: "block",
-        paddingLeft: "10px",
-        paddingRight: "10px",
-        backgroundColor: "#403448",
-        textAlign: "center",
-        borderRadius: "10px",
-        // marginRight: "0px",
-      }}
-    >
-      {innerHtml}
-    </span>
-  );
-};
+import Badge from "../../‌Badge/Badge";
 
 const HandleDelete = async (active, id) => {
   const response = await DeleteRestoreCourseAPI(active, id);
@@ -206,10 +168,10 @@ export const CourseCol = [
     cell: (row) => (
       <>
         {row.isActive ? (
-          <ActiveBadge innerHtml="فعال" />
+          <Badge innerHtml="فعال" status="Active" />
         ) : (
           <div style={{ marginRight: "-10px" }}>
-            <DiActiveBadge innerHtml="غیر فعال" />
+            <Badge innerHtml="غیر فعال" status="inActive" />
           </div>
         )}
       </>
@@ -224,9 +186,9 @@ export const CourseCol = [
     cell: (row) => (
       <>
         {row.isdelete ? (
-          <ActiveBadge innerHtml="حذف نشده" />
+          <Badge innerHtml="حذف شده " status="inActive" />
         ) : (
-          <DiActiveBadge innerHtml="حذف شده" />
+          <Badge innerHtml="حذف نشده" status="Active" />
         )}
       </>
     ),
@@ -268,8 +230,8 @@ export const CourseCol = [
                   HandleDelete(false, row.courseId);
                 }}
               >
-                <Trash2 size={14} className="me-50" />
-                <span className="align-middle">حذف دوره</span>
+                <SkipBack size={14} className="me-50" />
+                <span className="align-middle">بازیابی دوره</span>
               </DropdownItem>
             ) : (
               <DropdownItem
@@ -281,8 +243,8 @@ export const CourseCol = [
                   HandleDelete(true, row.courseId);
                 }}
               >
-                <SkipBack size={14} className="me-50" />
-                <span className="align-middle">بازیابی دوره</span>
+                <Trash2 size={14} className="me-50" />
+                <span className="align-middle">حذف دوره</span>
               </DropdownItem>
             )}
             {row.isActive ? (

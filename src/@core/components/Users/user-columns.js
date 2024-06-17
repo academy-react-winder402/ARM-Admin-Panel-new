@@ -30,13 +30,13 @@ import {
 
 // ** Reactstrap Imports
 import {
-  Badge,
   Button,
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
   UncontrolledDropdown,
 } from "reactstrap";
+import Badge from "../‌Badge/Badge";
 
 //import { deleteUserAPI } from "../../services/api/user/delete-user.api";
 
@@ -201,19 +201,9 @@ export const userCol = [
     cell: (row) => (
       <>
         {row.active ? (
-          <span
-            style={{
-              color: "#27BD6B",
-              width: "40px",
-              backgroundColor: "#28424B",
-              textAlign: "center",
-              borderRadius: "10px",
-            }}
-          >
-            فعال
-          </span>
+          <Badge innerHtml="فعال" status="Active" />
         ) : (
-          <span>غیر فعال</span>
+          <Badge innerHtml="غیر فعال" status="inActive" />
         )}
       </>
     ),
