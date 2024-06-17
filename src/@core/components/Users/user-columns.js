@@ -34,14 +34,22 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
+  Label,
   UncontrolledDropdown,
 } from "reactstrap";
 import Badge from "../‌Badge/Badge";
 
-//import { deleteUserAPI } from "../../services/api/user/delete-user.api";
+// ** Utils
+import { selectThemeColors } from "@utils";
 
+// ** Date
 import DateObject from "react-date-object";
 import persian from "react-date-object/calendars/persian";
+
+// ** Third Party Components
+import Select from "react-select";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const DateGenerator = (RawDate) => {
   var date = new DateObject(RawDate);
@@ -132,6 +140,68 @@ const RoleGenerator = ({ Roles }) => {
   return <RoleCards data={data} />;
 };
 
+const AddingRole = () => {
+  const colourOptions = [
+    { value: "", label: "هیچکدام" },
+    { value: 2, label: "استاد" },
+    { value: 5, label: "دانشجو" },
+    { value: 1, label: "ادمین" },
+  ];
+  const [Role, setRole] = useState();
+  const [SelectStatus, setSelectStatus] = useState("hide");
+
+  const MySwal = withReactContent(Swal);
+  const handleError = () => {
+    return MySwal.fire({
+      title: "ارور",
+      text: " کاربر جاری نمی تواند دسترسی های خود را تغییر دهد  ",
+      icon: "error",
+      confirmButtonText: "باشه",
+      customClass: {
+        confirmButton: "btn btn-primary",
+        container: "Font-Iran",
+      },
+      buttonsStyling: false,
+    });
+  };
+
+  return (
+    <div style={{ display: "flex", gap: "10px" }}>
+      <Select
+        theme={selectThemeColors}
+        className={
+          (SelectStatus == "show" ? "show" : " ") + " react-select Select_Role"
+        }
+        defaultValue={colourOptions[0]}
+        options={colourOptions}
+        value={Role}
+        onChange={(data) => setRole(data)}
+      />
+
+      {SelectStatus == "hide" ? (
+        <div
+          className="btn-primary-DDDD"
+          onClick={() => setSelectStatus("show")}
+        >
+          دسترسی
+        </div>
+      ) : (
+        <>
+          <div className="btn-primary-DDDD" onClick={() => handleError()}>
+            تایید
+          </div>
+          <div
+            className="btn-primary-RRRR"
+            onClick={() => setSelectStatus("hide")}
+          >
+            لغو
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
+
 export const userCol = [
   {
     name: "نام",
@@ -171,7 +241,6 @@ export const userCol = [
       </span>
     ),
   },
-
   {
     name: "شماره موبایل",
     sortable: true,
@@ -195,7 +264,7 @@ export const userCol = [
   {
     name: "وضعیت",
     sortable: true,
-    width: "120px",
+    width: "110px",
     sortField: "role",
     selector: (row) => row.active,
     cell: (row) => (
@@ -208,7 +277,6 @@ export const userCol = [
       </>
     ),
   },
-
   {
     name: "مدیریت",
     minWidth: "100px",
@@ -254,7 +322,8 @@ export const userCol = [
     ),
   },
   {
-    minWidth: "130px",
-    cell: (row) => <button className="btn-primary-DDDD">دسترسی</button>,
+    name: "دسترسی",
+    minWidth: "260px",
+    cell: (row) => <AddingRole Roles={row} />,
   },
 ];
