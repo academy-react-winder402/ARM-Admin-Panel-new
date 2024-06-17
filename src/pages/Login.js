@@ -82,13 +82,13 @@ const Login = () => {
           className="d-flex align-items-center auth-bg px-2 p-lg-5"
           lg="4"
           sm="12"
+          dir="rtl"
         >
           <Col className="px-xl-2 mx-auto" sm="8" md="6" lg="12">
             <CardTitle tag="h2" className="fw-bold mb-1">
               به پنل مدیریت خوش آمدید ! 👋
             </CardTitle>
             <CardText className="mb-2">لطفا برای ادامه کار وارد شوید</CardText>
-
             <Formik
               initialValues={{
                 phoneOrGmail: "",

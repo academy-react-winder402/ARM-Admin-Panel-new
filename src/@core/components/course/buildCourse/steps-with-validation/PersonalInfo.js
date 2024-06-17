@@ -1,142 +1,221 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable semi */
 // ** React Imports
-import { Fragment } from 'react'
-
-// ** Third Party Components
-import Select from 'react-select'
-import { useForm, Controller } from 'react-hook-form'
-import { ArrowLeft, ArrowRight } from 'react-feather'
+import { Fragment } from "react";
+import Cleave from "cleave.js/react";
 
 // ** Utils
-import { selectThemeColors } from '@utils'
+import { isObjEmpty } from "@utils";
+
+// ** Third Party Components
+import * as yup from "yup";
+import { useForm, Controller } from "react-hook-form";
+import { ArrowLeft, ArrowRight } from "react-feather";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 // ** Reactstrap Imports
-import { Label, Row, Col, Button, Form, Input, FormFeedback } from 'reactstrap'
-
-// ** Styles
-import '@styles/react/libs/react-select/_react-select.scss'
+import { Form, Label, Input, Row, Col, Button, FormFeedback } from "reactstrap";
 
 const defaultValues = {
-  lastName: '',
-  firstName: ''
-}
+  courseName: "",
+  price: "",
+  capacity: "",
+  // shortDes: "",
+  // numberOfseasion: "",
+  // date: "",
+  // password: "",
+};
 
 const PersonalInfo = ({ stepper }) => {
+  const SignupSchema = yup.object().shape({
+    courseName: yup.string().required(),
+    price: yup.string().required(),
+    capacity: yup.string().required(),
+    // shortDes: yup.string().required(),
+    // numberOfseasion: yup.string().required(),
+    // date: yup.string().required(),
+    // password: yup.string().required(),
+    // confirmPassword: yup
+    //   .string()
+    //   .required()
+    //   .oneOf([yup.ref(`password`), null], "Passwords must match"),
+  });
+  const options = { date: true, delimiter: "-", datePattern: ["Y", "m", "d"] };
+
   // ** Hooks
+
   const {
     control,
-    setError,
     handleSubmit,
-    formState: { errors }
-  } = useForm({ defaultValues })
+    formState: { errors },
+  } = useForm({
+    defaultValues,
+    resolver: yupResolver(SignupSchema),
+  });
 
-  const onSubmit = data => {
-    if (Object.values(data).every(field => field.length > 0)) {
-      stepper.next()
-    } else {
-      for (const key in data) {
-        if (data[key].length === 0) {
-          setError(key, {
-            type: 'manual',
-            message: `Please enter a valid ${key}`
-          })
-        }
-      }
+  const onSubmit = () => {
+    if (isObjEmpty(errors)) {
+      stepper.next();
     }
-  }
-
-  const countryOptions = [
-    { value: 'UK', label: 'UK' },
-    { value: 'USA', label: 'USA' },
-    { value: 'Spain', label: 'Spain' },
-    { value: 'France', label: 'France' },
-    { value: 'Italy', label: 'Italy' },
-    { value: 'Australia', label: 'Australia' }
-  ]
-
-  const languageOptions = [
-    { value: 'English', label: 'English' },
-    { value: 'French', label: 'French' },
-    { value: 'Spanish', label: 'Spanish' },
-    { value: 'Italian', label: 'Italian' },
-    { value: 'Japanese', label: 'Japanese' }
-  ]
+  };
 
   return (
     <Fragment>
-      <div className='content-header'>
-        <h5 className='mb-0'>Personal Info</h5>
-        <small>Enter Your Personal Info.</small>
-      </div>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Row>
-          <Col md='6' className='mb-1'>
-            <Label className='form-label' for='firstName'>
-              First Name
+          <Col md="4" className="mb-1">
+            <Label className="form-label" for="courseName">
+              نام دوره
             </Label>
             <Controller
-              id='firstName'
-              name='firstName'
+              id="courseName"
+              name="courseName"
               control={control}
-              render={({ field }) => <Input placeholder='John' invalid={errors.firstName && true} {...field} />}
+              render={({ field }) => (
+                <Input
+                  placeholder="دوره ری اکت"
+                  invalid={errors.courseName && true}
+                  {...field}
+                />
+              )}
             />
-            {errors.firstName && <FormFeedback>{errors.firstName.message}</FormFeedback>}
+            {errors.courseName && (
+              <FormFeedback>{errors.courseName.message}</FormFeedback>
+            )}
           </Col>
-          <Col md='6' className='mb-1'>
-            <Label className='form-label' for='lastName'>
-              Last Name
+          <Col md="4" className="mb-1">
+            <Label className="form-label" for={`price`}>
+              قیمت دوره
             </Label>
             <Controller
-              id='lastName'
-              name='lastName'
               control={control}
-              render={({ field }) => <Input placeholder='Doe' invalid={errors.lastName && true} {...field} />}
+              id="price"
+              name="price"
+              render={({ field }) => (
+                <Input
+                  type="number"
+                  placeholder="25000"
+                  invalid={errors.price && true}
+                  {...field}
+                />
+              )}
             />
-            {errors.lastName && <FormFeedback>{errors.lastName.message}</FormFeedback>}
+            {errors.price && (
+              <FormFeedback>{errors.price.message}</FormFeedback>
+            )}
+          </Col>
+          <Col md="4" className="mb-1">
+            <Label className="form-label" for={`capacity`}>
+              ظرفیت دوره
+            </Label>
+            <Controller
+              control={control}
+              id="capacity"
+              name="capacity"
+              render={({ field }) => (
+                <Input
+                  type="number"
+                  placeholder="12"
+                  invalid={errors.capacity && true}
+                  {...field}
+                />
+              )}
+            />
+            {errors.capacity && (
+              <FormFeedback>{errors.capacity.message}</FormFeedback>
+            )}
           </Col>
         </Row>
         <Row>
-          <Col md='6' className='mb-1'>
-            <Label className='form-label' for='country'>
-              Country
+          <div className="form-password-toggle col-md-4 mb-1">
+            <Label className="form-label" for="shortDes">
+              توضیحات کوتاه دوره
             </Label>
-            <Select
-              theme={selectThemeColors}
-              isClearable={false}
-              id={`country`}
-              className='react-select'
-              classNamePrefix='select'
-              options={countryOptions}
-              defaultValue={countryOptions[0]}
+            <Controller
+              id="shortDes"
+              name="shortDes"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  type="textarea"
+                  placeholder="نوعی زبان برنامه نویسی است"
+                  invalid={errors.lastName && true}
+                  name="text"
+                  id="exampleText"
+                  rows="3"
+                  {...field}
+                  style={{ minHeight: "80px" }}
+                />
+              )}
             />
-          </Col>
-          <Col md='6' className='mb-1'>
-            <Label className='form-label' for='language'>
-              Language
+            {errors.shortDes && (
+              <FormFeedback>{errors.shortDes.message}</FormFeedback>
+            )}
+          </div>
+          <div className="form-password-toggle col-md-4 mb-1">
+            <Label className="form-label" for="numberOfseasion">
+              تعداد جلسات دوره
             </Label>
-            <Select
-              isMulti
-              isClearable={false}
-              theme={selectThemeColors}
-              id={`language`}
-              options={languageOptions}
-              className='react-select'
-              classNamePrefix='select'
+            <Controller
+              control={control}
+              id="numberOfseasion"
+              name="numberOfseasion"
+              render={({ field }) => (
+                <Input
+                  type="number"
+                  placeholder="12"
+                  invalid={errors.lastName && true}
+                  {...field}
+                />
+              )}
             />
-          </Col>
+            {errors.numberOfseasion && (
+              <FormFeedback>{errors.numberOfseasion.message}</FormFeedback>
+            )}
+          </div>
+          <div className="form-password-toggle col-md-4 mb-1">
+            <Label className="form-label" for="date">
+              زمان برگذاری
+            </Label>
+            <Controller
+              control={control}
+              id="date"
+              name="date"
+              render={({ field }) => (
+                <Cleave
+                  className="form-control"
+                  placeholder="2001-01-01"
+                  options={options}
+                />
+              )}
+            />
+            {errors.date && <FormFeedback>{errors.date.message}</FormFeedback>}
+          </div>
         </Row>
-        <div className='d-flex justify-content-between'>
-          <Button type='button' color='primary' className='btn-prev' onClick={() => stepper.previous()}>
-            <ArrowLeft size={14} className='align-middle me-sm-25 me-0'></ArrowLeft>
-            <span className='align-middle d-sm-inline-block d-none'>Previous</span>
+        <div className="d-flex justify-content-between">
+          <Button
+            color="secondary"
+            className="btn-prev"
+            outline
+            onClick={() => stepper.previous()}
+          >
+            <ArrowLeft
+              size={14}
+              className="align-middle me-sm-25 me-0"
+            ></ArrowLeft>
+            <span className="align-middle d-sm-inline-block d-none">قبلی</span>
           </Button>
-          <Button type='submit' color='primary' className='btn-next'>
-            <span className='align-middle d-sm-inline-block d-none'>Next</span>
-            <ArrowRight size={14} className='align-middle ms-sm-25 ms-0'></ArrowRight>
+          <Button type="submit" color="primary" className="btn-next">
+            <span className="align-middle d-sm-inline-block d-none">بعدی</span>
+            <ArrowRight
+              size={14}
+              className="align-middle ms-sm-25 ms-0"
+            ></ArrowRight>
           </Button>
         </div>
       </Form>
     </Fragment>
-  )
-}
+  );
+};
 
-export default PersonalInfo
+export default PersonalInfo;

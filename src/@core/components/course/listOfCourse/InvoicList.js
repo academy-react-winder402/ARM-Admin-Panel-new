@@ -32,7 +32,6 @@ const InvoiceList = () => {
   const [sort, setSort] = useState("desc");
   const [sortColumn, setSortColumn] = useState("id");
   const [currentPage, setCurrentPage] = useState(1);
-  const [statusValue, setStatusValue] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const [data, setData] = useState({});
@@ -52,18 +51,32 @@ const InvoiceList = () => {
 
   const handleFilter = (val) => {
     setValue(val);
+    setData((prev) => ({
+      ...prev,
+      q: val,
+    }));
   };
 
   const handlePerPage = (e) => {
     setRowsPerPage(parseInt(e.target.value));
-  };
-
-  const handleStatusValue = (e) => {
-    setStatusValue(e.target.value);
+    setData((prev) => ({
+      ...prev,
+      perPage: parseInt(e.target.value),
+    }));
   };
 
   const handlePagination = (page) => {
     setCurrentPage(page.selected + 1);
+    setData((prev) => ({
+      ...prev,
+      page: page.selected + 1,
+    }));
+    // const arr = [1, 3, 5, 6, 7];
+    // const newArr = [2, 4, 6, 8];
+    // const currentArr = [2, 4, 6, 8, 1, 3, 5, 6, 7];
+    // [...newArr, ...arr];
+
+    // console.log(currentArr);
   };
 
   const CustomPagination = () => {
@@ -92,14 +105,14 @@ const InvoiceList = () => {
   };
 
   const dataToRender = () => {
-    const filters = {
-      q: value,
-      status: statusValue,
-    };
+    // const filters = {
+    //   q: value,
+    //   status: statusValue,
+    // };
 
-    const isFiltered = Object.keys(filters).some(function (k) {
-      return filters[k].length > 0;
-    });
+    // const isFiltered = Object.keys(filters).some(function (k) {
+    //   return filters[k].length > 0;
+    // });
 
     if (data.length > 0) {
       return data;
@@ -111,12 +124,16 @@ const InvoiceList = () => {
   const handleSort = (column, sortDirection) => {
     setSort(sortDirection);
     setSortColumn(column.sortField);
+    setData((prev) => ({
+      ...prev,
+      sortColumn: column.sortField,
+      sort: sortDirection,
+    }));
     // dispatch(
     // setData({
     //   q: value,
     //   page: currentPage,
     //   sort: sortDirection,
-    //   status: statusValue,
     //   perPage: rowsPerPage,
     //   sortColumn: column.sortField,
     // });
@@ -145,11 +162,9 @@ const InvoiceList = () => {
             subHeaderComponent={
               <CustomHeader
                 value={value}
-                statusValue={statusValue}
                 rowsPerPage={rowsPerPage}
                 handleFilter={handleFilter}
                 handlePerPage={handlePerPage}
-                handleStatusValue={handleStatusValue}
               />
             }
           />
@@ -159,14 +174,7 @@ const InvoiceList = () => {
   );
 };
 
-const CustomHeader = ({
-  handleFilter,
-  value,
-  handleStatusValue,
-  statusValue,
-  handlePerPage,
-  rowsPerPage,
-}) => {
+const CustomHeader = ({ handleFilter, value, handlePerPage, rowsPerPage }) => {
   return (
     <div className="invoice-list-table-header w-100 py-2">
       <Row>

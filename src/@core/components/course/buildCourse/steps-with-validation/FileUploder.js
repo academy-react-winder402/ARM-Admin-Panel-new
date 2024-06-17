@@ -4,7 +4,12 @@ import FileUploaderMultiple from "./FileUploaderMultiple";
 import { ArrowLeft, ArrowRight } from "react-feather";
 import { Button } from "reactstrap";
 
-function FileUploder() {
+function FileUploder({ stepper }) {
+  const onSubmit = () => {
+    // if (isObjEmpty(errors)) {
+    stepper.next();
+    // }
+  };
   return (
     <Fragment>
       <Row>
@@ -22,7 +27,7 @@ function FileUploder() {
               قدم قبلی
             </span>
           </Button>
-          <Button type="submit" color="primary" className="btn-next">
+          <Button onClick={onSubmit} color="primary" className="btn-next">
             <span className="align-middle d-sm-inline-block d-none">
               قدم بعدی
             </span>
