@@ -12,7 +12,6 @@ import PublicRoute from "@components/routes/PublicRoute";
 
 // ** Utils
 import { isObjEmpty } from "@utils";
-import YourList from "../../pages/course/YourList";
 
 const getLayout = {
   blank: <BlankLayout />,
@@ -25,11 +24,17 @@ const TemplateTitle = "%s - Vuexy React Admin Template";
 
 // ** Default Route
 const DefaultRoute = "/home";
-
 const Home = lazy(() => import("../../pages/Home"));
-const Yourlist = lazy(() => import("../../pages/course/YourList"));
-const MembersList = lazy(() => import("../../pages/Members/Members"));
-const ListOfCourse = lazy(() => import("../../pages/course/ListOfCourse"));
+
+/* Member pages*/
+const MembersList = lazy(() => import("../../pages/Users.jsx"));
+const MemberDetail = lazy(() => import("../../pages/UserProfile/index.js"));
+
+/* Courses pages */
+const ListOfCourse = lazy(() => import("../../pages/course/Courses.jsx"));
+const CreateCourse = lazy(() => import("../../pages/course/BuildCourse.js"));
+import UserView from "../../@core/components/course/reserveList/UserView.js";
+
 const BuildCourse = lazy(() => import("../../pages/course/BuildCourse"));
 const ReserveList = lazy(() => import("../../pages/course/ReserveList"));
 const Login = lazy(() => import("../../pages/Login"));
@@ -50,6 +55,24 @@ const Routes = [
     path: "/Users",
     element: <MembersList />,
   },
+  {
+    path: "/Users/Detail/:id",
+    element: <MemberDetail />,
+  },
+
+  // Course
+  {
+    path: "/Courses",
+    element: <ListOfCourse />,
+  },
+  {
+    path: "/Courses/AddCourse",
+    element: <CreateCourse />,
+  },
+  {
+    path: "/Courses/Detail",
+    element: <UserView />,
+  },
 
   // News
   {
@@ -60,14 +83,7 @@ const Routes = [
     path: "/home",
     element: <Home />,
   },
-  {
-    path: "/yourlist",
-    element: <Yourlist />,
-  },
-  {
-    path: "/listOfCourse",
-    element: <ListOfCourse />,
-  },
+
   {
     path: "/buildCourse",
     element: <BuildCourse />,

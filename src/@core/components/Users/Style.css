@@ -1,0 +1,54 @@
+.btn-primary-DDDD {
+  border-color: #7367f0 !important;
+  background-color: #7367f0 !important;
+  box-shadow: none;
+  /* margin-right: 1.5rem !important; */
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  cursor: pointer;
+  border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);
+  border-radius: 5px;
+  color: #fff !important;
+  font-weight: 500;
+  transition: 1s;
+}
+
+.btn-primary-RRRR {
+  border-color: #f52a2a !important;
+  background-color: #f52a2a !important;
+  box-shadow: none;
+  /*  margin-right: 10px; */
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: center;
+  cursor: pointer;
+  border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);
+  border-radius: 5px;
+  color: #f4e9e9 !important;
+  font-weight: 500;
+  transition: 1s;
+}
+
+.SelectOption_Custom {
+  min-width: 150px;
+  max-width: 150px;
+}
+
+.Select_Role {
+  transition-property: opacity, width;
+  transition-duration: 0.5s, 0.3s;
+  transition-delay: 0.3s, 0s;
+  opacity: 0;
+  width: 0px;
+  height: 34px;
+  overflow: hidden;
+}
+
+.Select_Role.show {
+  opacity: 1;
+  width: 110px;
+  overflow: visible;
+}

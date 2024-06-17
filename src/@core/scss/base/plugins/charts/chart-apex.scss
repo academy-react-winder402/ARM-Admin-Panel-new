@@ -1,8 +1,8 @@
-@import '../../bootstrap-extended/include'; // Bootstrap includes
-@import '../../components/include'; // Components includes
+@import "../../bootstrap-extended/include"; // Bootstrap includes
+@import "../../components/include"; // Components includes
 
 .apexcharts-canvas {
-  line[stroke='transparent'] {
+  line[stroke="transparent"] {
     display: none;
   }
   .apexcharts-tooltip {
@@ -65,7 +65,7 @@
   .apexcharts-tooltip-text,
   .apexcharts-datalabel-label,
   .apexcharts-datalabel {
-    font-family: $font-family-base !important;
+    /* font-family: $font-family-base !important; */
     fill: $body-color;
     font-weight: 400;
     filter: none;
