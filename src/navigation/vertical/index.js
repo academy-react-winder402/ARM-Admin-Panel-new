@@ -71,7 +71,7 @@ export default [
         id: "NewsList",
         title: "لیست اخبار",
         icon: <List size={12} />,
-        navLink: "/News/NewsList",
+        navLink: "/ListOfNews",
       },
       {
         id: "AddNews",
