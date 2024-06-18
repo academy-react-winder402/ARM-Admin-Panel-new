@@ -29,7 +29,7 @@ const Users = () => {
   const [students, setStudents] = useState();
   const [teachers, setTeachers] = useState();
   const [admins, setAdmins] = useState();
-  const [currentPage, setCurrentPage] = useState();
+  const [currentPage, setCurrentPage] = useState(0);
   const [rowsOfPage, setRowsOfPage] = useState(8);
   const [query, setQuery] = useState();
   const [sortingCol, setSortingCol] = useState("DESC");
@@ -74,7 +74,7 @@ const Users = () => {
     const fetchUserLists = async () => {
       try {
         const getUserLists = await getUserListsAPI(
-          currentPage,
+          currentPage + 1,
           rowsOfPage,
           sortingCol,
           sortType,

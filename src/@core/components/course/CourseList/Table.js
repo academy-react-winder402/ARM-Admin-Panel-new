@@ -135,11 +135,6 @@ const UsersListTable = ({
   setRefetch,
   refetch,
 }) => {
-  // ** Function in get data on page change
-  const handlePagination = (page) => {
-    setCurrentPage(page.selected + 1);
-  };
-
   // ** Function in get data on rows per page
   const handlePerPage = (e) => {
     const value = parseInt(e.currentTarget.value);
@@ -163,7 +158,6 @@ const UsersListTable = ({
         nextLabel={""}
         pageCount={count || 1}
         activeClassName="active"
-        s
         forcePage={currentPage}
         onPageChange={(page) => setCurrentPage(page.selected)}
         pageClassName={"page-item"}
