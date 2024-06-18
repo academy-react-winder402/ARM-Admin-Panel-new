@@ -3,20 +3,20 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 // ** User List Component
-import UsersListTable from "../@core/components/Users/Table";
+import UsersListTable from "../../@core/components/Users/Table";
 
 // ** Reactstrap Imports
 import { Col, Row } from "reactstrap";
 
 // ** Custom Components
-import StatsHorizontal from "../@core/components/StatsHorizontal";
-import BreadCrumbs from "../@core/components/breadcrumbs";
+import StatsHorizontal from "../../@core/components/StatsHorizontal";
+import BreadCrumbs from "../../@core/components/breadcrumbs";
 
 // ** Icons Imports
 import { User, UserCheck, UserPlus, UserX } from "react-feather";
 
 // ** Core Imports
-import { getUserListsAPI } from "../@core/services/api/user/get-user-lists.api";
+import { getUserListsAPI } from "../../@core/services/api/user/get-user-lists.api";
 
 // ** Styles
 import "@styles/react/apps/app-users.scss";

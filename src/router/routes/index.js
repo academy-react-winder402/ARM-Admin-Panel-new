@@ -27,7 +27,7 @@ const DefaultRoute = "/home";
 const Home = lazy(() => import("../../pages/Home"));
 
 /* Member pages*/
-const MembersList = lazy(() => import("../../pages/Users.jsx"));
+const MembersList = lazy(() => import("../../pages/Users/Users.jsx"));
 const MemberDetail = lazy(() => import("../../pages/UserProfile/index.js"));
 
 /* Courses pages */
