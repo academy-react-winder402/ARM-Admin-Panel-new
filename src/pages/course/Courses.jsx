@@ -13,15 +13,7 @@ import StatsHorizontal from "../../@core/components/StatsHorizontal";
 import BreadCrumbs from "../../@core/components/breadcrumbs";
 
 // ** Icons Imports
-import {
-  User,
-  UserCheck,
-  UserPlus,
-  UserX,
-  BookOpen,
-  Trash2,
-  Book,
-} from "react-feather";
+import { BookOpen, Trash2, Book } from "react-feather";
 
 // ** Core Imports
 import { getCourseListsAPI } from "../../@core/services/api/Course/Courses";
@@ -33,9 +25,10 @@ import { CountUp } from "use-count-up";
 const Users = () => {
   const [allUsers, setAllUsers] = useState();
   const [userLists, setUserLists] = useState();
-  const [currentPage, setCurrentPage] = useState();
+  const [currentPage, setCurrentPage] = useState(0);
   const [rowsOfPage, setRowsOfPage] = useState(8);
   const [query, setQuery] = useState();
+  const [refetch, setRefetch] = useState(false);
 
   const [MainFilter, setMainFilter] = useState(1);
 
@@ -58,7 +51,7 @@ const Users = () => {
     const fetchCourseLists = async () => {
       try {
         const getUserLists = await getCourseListsAPI(
-          currentPage,
+          currentPage + 1,
           rowsOfPage,
           query
         );
@@ -70,7 +63,7 @@ const Users = () => {
     };
 
     fetchCourseLists();
-  }, [rowsOfPage, currentPage, query]);
+  }, [rowsOfPage, currentPage, query, refetch]);
 
   return (
     <div className="app-user-list">
@@ -154,6 +147,8 @@ const Users = () => {
         setRowsOfPage={setRowsOfPage}
         setCurrentPage={setCurrentPage}
         setQuery={setQuery}
+        setRefetch={setRefetch}
+        refetch={refetch}
       />
     </div>
   );
