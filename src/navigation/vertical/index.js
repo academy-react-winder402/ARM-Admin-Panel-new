@@ -47,25 +47,18 @@ export default [
     id: "News",
     title: "اخبار",
     icon: <List size={20} />,
-    navLink: "/News",
     children: [
       {
         id: "NewsList",
         title: "لیست اخبار",
         icon: <List size={12} />,
-        navLink: "/News/NewsList",
+        navLink: "Articles",
       },
       {
         id: "AddNews",
         title: "ایجاد خبر جدید",
         icon: <List size={12} />,
         navLink: "/AddNews",
-      },
-      {
-        id: "NewsGroup",
-        title: "لیست دسته بندی",
-        icon: <List size={12} />,
-        navLink: "/News/NewsGroup",
       },
     ],
   },

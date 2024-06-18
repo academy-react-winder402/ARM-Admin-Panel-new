@@ -35,6 +35,9 @@ const ListOfCourse = lazy(() => import("../../pages/course/Courses.jsx"));
 const CreateCourse = lazy(() => import("../../pages/course/BuildCourse.js"));
 import UserView from "../../@core/components/course/reserveList/UserView.js";
 
+/* Articles pages */
+const ListOfArticle = lazy(() => import("../../pages/Articles/Article.jsx"));
+
 const BuildCourse = lazy(() => import("../../pages/course/BuildCourse"));
 const Login = lazy(() => import("../../pages/Login"));
 const Register = lazy(() => import("../../pages/Register"));
@@ -80,10 +83,15 @@ const Routes = [
     element: <AddNews />,
   },
   {
+    path: "/Articles",
+    element: <ListOfArticle />,
+  },
+
+  // Others
+  {
     path: "/home",
     element: <Home />,
   },
-
   {
     path: "/buildCourse",
     element: <BuildCourse />,

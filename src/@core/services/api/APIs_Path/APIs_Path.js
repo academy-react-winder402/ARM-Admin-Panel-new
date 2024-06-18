@@ -3,4 +3,6 @@ export const APIs_Path = {
   GetAllCourse: "/Course/CourseList",
   ActiveDeActiveCourse: "/Course/ActiveAndDeactiveCourse",
   DeleteRestoreCourse: "/Course/DeleteCourse",
+  GetArticle: "/News/AdminNewsFilterList",
+  ActiveDeActiveArticle: "/News/ActiveDeactiveNews",
 };
