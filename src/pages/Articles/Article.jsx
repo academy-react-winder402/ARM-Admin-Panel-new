@@ -29,6 +29,7 @@ const Article = () => {
   const [rowsOfPage, setRowsOfPage] = useState(8);
   const [query, setQuery] = useState();
   const [refetch, setRefetch] = useState(false);
+
   const [MainFilter, setMainFilter] = useState(true);
 
   const [ActiveCount, setActiveCount] = useState();

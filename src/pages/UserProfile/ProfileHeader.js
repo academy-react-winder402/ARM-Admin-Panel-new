@@ -91,6 +91,18 @@ const ProfileHeader = ({ data, Step, setStep }) => {
                     <Info className="d-block d-md-none" size={14} />
                   </NavLink>
                 </NavItem>
+                <NavItem>
+                  <NavLink
+                    className="fw-bold"
+                    active={Step == 3 ? true : false}
+                    onClick={() => {
+                      setStep(3);
+                    }}
+                  >
+                    <span className="d-none d-md-block">دوره های رزرو شده</span>
+                    <Info className="d-block d-md-none" size={14} />
+                  </NavLink>
+                </NavItem>
               </Nav>
               <Button color="primary">
                 <Edit className="d-block d-md-none" size={14} />

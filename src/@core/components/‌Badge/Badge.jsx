@@ -37,6 +37,26 @@ function Badge({ innerHtml, status }) {
           {innerHtml}
         </span>
       )}
+      {status == "RoleTag" && (
+        <span
+          className="text-capitalize badge bg-light-primary rounded-pill"
+          style={{
+            textAlign: "center",
+            borderRadius: "5px",
+            paddingLeft: "10px",
+            paddingRight: "10px",
+            paddingTop: "8px",
+            paddingBottom: "8px",
+            fontSize: "12px",
+            fontWeight: "lighter",
+            marginTop: "10px",
+            marginLeft: "4px",
+            marginRight: "1px",
+          }}
+        >
+          {innerHtml}
+        </span>
+      )}
     </>
   );
 }

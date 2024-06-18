@@ -1,38 +1,7 @@
 // ** Reactstrap Imports
 import { Card, CardBody, CardText } from "reactstrap";
 
-const ActiveBadge = () => {
-  return (
-    <span
-      style={{
-        color: "#27BD6B",
-        width: "60px",
-        display: "block",
-        backgroundColor: "#28424B",
-        textAlign: "center",
-        borderRadius: "10px",
-      }}
-    >
-      فعال
-    </span>
-  );
-};
-const DiActiveBadge = () => {
-  return (
-    <span
-      style={{
-        color: "#6a040f",
-        width: "60px",
-        display: "block",
-        backgroundColor: "rgba(235,113,127, 0.6)",
-        textAlign: "center",
-        borderRadius: "10px",
-      }}
-    >
-      غیر فعال
-    </span>
-  );
-};
+import Badge from "../../@core/components/‌Badge/Badge.jsx";
 
 const ProfileAbout = ({ data }) => {
   return (
@@ -43,16 +12,6 @@ const ProfileAbout = ({ data }) => {
           {data.userAbout ? data.userAbout : "توضیحی وارد نشده است"}
         </CardText>
         <div className="mt-2">
-          <h5 className="mb-75">شماره موبایل :</h5>
-          <CardText>{data.phoneNumber}</CardText>
-        </div>
-        <div className="mt-2">
-          <h5 className="mb-75">آدرس کاربر :</h5>
-          <CardText>
-            {data.homeAdderess ? data.homeAdderess : "وارد نشده"}
-          </CardText>
-        </div>
-        <div className="mt-2">
           <h5 className="mb-75"> جیمیل :</h5>
           <CardText>{data.gmail}</CardText>
         </div>
@@ -62,7 +21,11 @@ const ProfileAbout = ({ data }) => {
         </div>
         <div className="mt-2" style={{ width: "fit-content" }}>
           <h5 className="mb-75"> وضعیت :</h5>
-          {data.active ? <ActiveBadge /> : <DiActiveBadge />}
+          {data.active ? (
+            <Badge innerHtml="فعال" status="Active" />
+          ) : (
+            <Badge innerHtml="غیر فعال" status="inActive" />
+          )}
         </div>
         <div className="mt-2">
           <h5 className="mb-75"> جنسیت :</h5>
@@ -71,19 +34,11 @@ const ProfileAbout = ({ data }) => {
         <div className="mt-2">
           <h5 className="mb-75"> ورود دومرحله ای :</h5>
           <CardText>
-            {data.twoStepAuth ? <ActiveBadge /> : <DiActiveBadge />}
-          </CardText>
-        </div>
-        <div className="mt-2">
-          <h5 className="mb-75">آدرس تلگرام :</h5>
-          <CardText>
-            {data.telegramLink ? data.telegramLink : "وارد نشده"}
-          </CardText>
-        </div>
-        <div className="mt-2">
-          <h5 className="mb-75">آدرس لینکدین :</h5>
-          <CardText>
-            {data.linkdinProfile ? data.linkdinProfile : "وارد نشده"}
+            {data.twoStepAuth ? (
+              <Badge innerHtml="فعال" status="Active" />
+            ) : (
+              <Badge innerHtml="غیر فعال" status="inActive" />
+            )}
           </CardText>
         </div>
       </CardBody>

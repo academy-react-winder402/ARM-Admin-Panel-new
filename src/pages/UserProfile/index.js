@@ -8,9 +8,11 @@ import axios from "axios";
 import UILoader from "@components/ui-loader";
 import Breadcrumbs from "@components/breadcrumbs";
 import GoalOverview from "../../@core/components/ui-elements/cards/analytics/GoalOverview";
+import CourseList from "./Lists/MyCourse";
+import ReserveCourseList from "./Lists/MyReserve";
 
 // ** Reactstrap Imports
-import { Row, Col, Button } from "reactstrap";
+import { Row, Col, Button, Card, CardBody, CardText } from "reactstrap";
 
 // ** Demo Components
 import ProfilePoll from "./ProfilePolls";
@@ -29,6 +31,9 @@ import "@styles/react/pages/page-profile.scss";
 import { GetUserDetail } from "../../@core/services/api/UserDetail/GetUserDetail";
 import { useParams } from "react-router-dom";
 import BreadCrumbs from "../../@core/components/breadcrumbs";
+import Badge from "../../@core/components/‌Badge/Badge";
+
+import { Edit } from "react-feather";
 
 const Profile = () => {
   // ** States
@@ -38,6 +43,19 @@ const Profile = () => {
   const GetData = async () => {
     let data = await GetUserDetail(params.id);
     setData(data);
+  };
+
+  const ShowRoles = ({ data }) => {
+    return (
+      <>
+        {data.map((item, key) => (
+          <Badge innerHtml={item.roleName} status="RoleTag" key={key}></Badge>
+        ))}
+        <div style={{ cursor: "pointer", display: "inline" }}>
+          <Badge innerHtml={<Edit size={20} />} status="Active" />
+        </div>
+      </>
+    );
   };
 
   const params = useParams();
@@ -74,6 +92,48 @@ const Profile = () => {
                   >
                     <ProfileAbout data={data} />
                   </Col>
+
+                  <Col
+                    lg={{ size: 3, order: 1 }}
+                    sm={{ size: 12 }}
+                    xs={{ order: 2 }}
+                  >
+                    <Card>
+                      <CardBody>
+                        <h5 className="mb-75"> نقش ها</h5>
+                        <ShowRoles data={data.roles} />
+                      </CardBody>
+                    </Card>
+                    <Card>
+                      <CardBody>
+                        <h5 className="mb-75">شماره موبایل :</h5>
+                        <CardText>
+                          {data.homeAdderess ? data.phoneNumber : "وارد نشده"}
+                        </CardText>
+                        <div className="mt-2">
+                          <h5 className="mb-75">آدرس کاربر :</h5>
+                          <CardText>{data.homeAdderess}</CardText>
+                        </div>
+                        <div className="mt-2">
+                          <h5 className="mb-75">آدرس تلگرام :</h5>
+                          <CardText>
+                            {data.telegramLink
+                              ? data.telegramLink
+                              : "وارد نشده"}
+                          </CardText>
+                        </div>
+                        <div className="mt-2">
+                          <h5 className="mb-75">آدرس لینکدین :</h5>
+                          <CardText>
+                            {data.linkdinProfile
+                              ? data.linkdinProfile
+                              : "وارد نشده"}
+                          </CardText>
+                        </div>
+                      </CardBody>
+                    </Card>
+                  </Col>
+
                   <Col
                     lg={{ size: 6, order: 1 }}
                     sm={{ size: 12 }}
@@ -89,7 +149,11 @@ const Profile = () => {
               </section>
             ) : null}
 
-            {Step == 2 ? <h1>این دوره های کاربر است</h1> : null}
+            {Step == 2 ? <CourseList data={data.courses} /> : null}
+
+            {Step == 3 ? (
+              <ReserveCourseList data={data.coursesReseves} />
+            ) : null}
           </div>
         </Fragment>
       ) : null}

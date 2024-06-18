@@ -74,7 +74,7 @@ const Users = () => {
     const fetchUserLists = async () => {
       try {
         const getUserLists = await getUserListsAPI(
-          currentPage + 1,
+          currentPage,
           rowsOfPage,
           sortingCol,
           sortType,
