@@ -297,21 +297,6 @@ const UsersListTable = ({
       }
     };
 
-    const MySwal = withReactContent(Swal);
-    const handleError = () => {
-      return MySwal.fire({
-        title: "ارور",
-        text: " کاربر جاری نمی تواند دسترسی های خود را تغییر دهد  ",
-        icon: "error",
-        confirmButtonText: "باشه",
-        customClass: {
-          confirmButton: "btn btn-primary",
-          container: "Font-Iran",
-        },
-        buttonsStyling: false,
-      });
-    };
-
     return (
       <div style={{ display: "flex", gap: "10px" }}>
         <Select

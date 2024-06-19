@@ -92,3 +92,13 @@ export const UpdateNewsApi = async (Form_date) => {
     return false;
   }
 };
+
+export const NewsCategoryApi = async () => {
+  try {
+    const response = await http.get(APIs_Path.NewsCategory);
+
+    return response;
+  } catch (error) {
+    return false;
+  }
+};

@@ -60,6 +60,12 @@ export default [
         icon: <List size={12} />,
         navLink: "/AddArticle",
       },
+      {
+        id: "ArticleCategory",
+        title: " لیست دسته بندی ها ",
+        icon: <List size={12} />,
+        navLink: "/ArticleCategory",
+      },
     ],
   },
 ];

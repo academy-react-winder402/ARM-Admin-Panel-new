@@ -41,6 +41,9 @@ import UserView from "../../@core/components/course/reserveList/UserView.js";
 const ListOfArticle = lazy(() => import("../../pages/Articles/Article.jsx"));
 const AddArticle = lazy(() => import("../../pages/Articles/AddArticle.jsx"));
 const EditArticle = lazy(() => import("../../pages/Articles/EditArticle.jsx"));
+const ArticleCategory = lazy(() =>
+  import("../../pages/Articles/CategoryList.jsx")
+);
 
 const BuildCourse = lazy(() => import("../../pages/course/BuildCourse"));
 const Login = lazy(() => import("../../pages/Login"));
@@ -101,6 +104,10 @@ const Routes = [
   {
     path: "/EditArticle/:id",
     element: <EditArticle />,
+  },
+  {
+    path: "/ArticleCategory",
+    element: <ArticleCategory />,
   },
 
   // Others
