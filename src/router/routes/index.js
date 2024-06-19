@@ -39,6 +39,7 @@ import UserView from "../../@core/components/course/reserveList/UserView.js";
 
 /* Articles pages */
 const ListOfArticle = lazy(() => import("../../pages/Articles/Article.jsx"));
+const AddArticle = lazy(() => import("../../pages/Articles/AddArticle.jsx"));
 
 const BuildCourse = lazy(() => import("../../pages/course/BuildCourse"));
 const Login = lazy(() => import("../../pages/Login"));
@@ -89,12 +90,12 @@ const Routes = [
 
   // News
   {
-    path: "/AddNews",
-    element: <AddNews />,
-  },
-  {
     path: "/Articles",
     element: <ListOfArticle />,
+  },
+  {
+    path: "/AddArticle",
+    element: <AddArticle />,
   },
 
   // Others
@@ -141,6 +142,10 @@ const Routes = [
       layout: "blank",
     },
   },
+  /* {
+    path: "/AddNews",
+    element: <AddNews />,
+  }, */
 ];
 
 const getRouteMeta = (route) => {

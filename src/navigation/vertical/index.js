@@ -58,7 +58,7 @@ export default [
         id: "AddNews",
         title: "ایجاد خبر جدید",
         icon: <List size={12} />,
-        navLink: "/AddNews",
+        navLink: "/AddArticle",
       },
     ],
   },

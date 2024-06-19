@@ -1,7 +1,6 @@
 import http from "../../../interceptors/interceptors";
 import { APIs_Path } from "../APIs_Path/APIs_Path";
 
-// ** CourseList
 export const getArticleListsAPI = async (
   pageNumber,
   rowsOfPage,
@@ -26,11 +25,6 @@ export const getArticleListsAPI = async (
 
 export const ActiveDeActiveArticleAPI = async (Active, id) => {
   try {
-    const CurrObj = {
-      active: Active,
-      id: id,
-    };
-
     var Form_date = new FormData();
     Form_date.append("Id", id);
     Form_date.append("Active", Active);
@@ -44,6 +38,31 @@ export const ActiveDeActiveArticleAPI = async (Active, id) => {
         },
       }
     );
+    return response;
+  } catch (error) {
+    return false;
+  }
+};
+
+export const getNewsCatAPI = async () => {
+  try {
+    const response = await http.get(APIs_Path.NewsCategory);
+
+    return response;
+  } catch (error) {
+    return false;
+  }
+};
+
+export const AddNewsApi = async (Form_date) => {
+  console.log(Form_date);
+  try {
+    const response = await http.post(APIs_Path.AddNews, Form_date, {
+      headers: {
+        "Content-Type":
+          "multipart/form-data; boundary=<calculated when request is sent>",
+      },
+    });
     return response;
   } catch (error) {
     return false;
