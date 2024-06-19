@@ -13,6 +13,8 @@ export const APIs_Path = {
   ActiveDeActiveArticle: "/News/ActiveDeactiveNews",
   NewsCategory: "/News/GetListNewsCategory",
   AddNews: "/News/CreateNews",
+  GetNewsById: "/News/",
+  UpdateNews: "/News/UpdateNews",
 
   // Other
   loginAPI: "/sign/login",

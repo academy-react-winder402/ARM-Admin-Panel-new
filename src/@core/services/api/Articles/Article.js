@@ -68,3 +68,27 @@ export const AddNewsApi = async (Form_date) => {
     return false;
   }
 };
+
+export const getNewsByIdAPI = async (id) => {
+  try {
+    const response = await http.get(APIs_Path.GetNewsById + id);
+
+    return response;
+  } catch (error) {
+    return false;
+  }
+};
+
+export const UpdateNewsApi = async (Form_date) => {
+  //console.log(Form_date);
+  try {
+    const response = await http.put(APIs_Path.UpdateNews, Form_date, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response;
+  } catch (error) {
+    return false;
+  }
+};

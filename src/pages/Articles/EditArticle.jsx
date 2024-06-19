@@ -3,36 +3,19 @@ import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 
 import Breadcrumbs from "@components/breadcrumbs";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardBody,
-  CardText,
-  Input,
-  Label,
-  Row,
-  Col,
-  Button,
-} from "reactstrap";
+import { Card, CardBody, Label, Row, Col, Button } from "reactstrap";
 
-import FileUploaderMultiple from "../../@core/components/File Uploader/FileUploaderMultiple";
-import { getNewsCatAPI } from "../../@core/services/api/Articles/Article";
-import { AddNewsApi } from "../../@core/services/api/Articles/Article";
+import {
+  getNewsCatAPI,
+  getNewsByIdAPI,
+  UpdateNewsApi,
+} from "../../@core/services/api/Articles/Article";
+
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-
-const initialValues = {
-  Title: "",
-  GoogleTitle: "",
-  GoogleDescribe: "",
-  Describe: "",
-  NewsCatregoryId: "",
-  MiniDescribe: "",
-  Keyword: "",
-};
 
 const validationSchema = Yup.object({
   Title: Yup.string()
@@ -54,8 +37,11 @@ const validationSchema = Yup.object({
   Keyword: Yup.string().required("کلمه کلیدی الزامی است"),
 });
 
-const AddNews = () => {
+const EditNews = () => {
   const navigate = useNavigate();
+  const param = useParams();
+  const [Category, setCategory] = useState([]);
+  const [initialValues, setInitialValues] = useState(null); // Changed to null initially
 
   const handleSubmit = async (values) => {
     const formData = new FormData();
@@ -63,20 +49,21 @@ const AddNews = () => {
       formData.append(key, values[key]);
     }
 
-    const AddNew = await AddNewsApi(formData);
-    if (AddNew.success) {
-      toast.success(AddNew.message);
+    const UpdateNews = await UpdateNewsApi(formData);
+    console.log(formData);
+    if (UpdateNews.success) {
+      toast.success(UpdateNews.message);
       navigate("/Articles");
     } else {
-      toast.error(AddNew.message);
+      toast.error(UpdateNews.message);
     }
   };
 
   const MySwal = withReactContent(Swal);
   const handleDeleteCourseComment = () => {
     MySwal.fire({
-      title: "آیا از لغو ایجاد خبر مطمئن هستید؟",
-      text: "در صورت  لغو  ایجاد خبر اطلاعات وارد شده حذف میشوند",
+      title: "آیا از لغو ویرایش خبر مطمئن هستید؟",
+      text: "در صورت  لغو فرایند ویرایش، اطلاعات ویرایش شد حذف میشوند",
       icon: "warning",
       customClass: {
         confirmButton: "btn btn-primary",
@@ -94,12 +81,21 @@ const AddNews = () => {
       confirmButton: () => {
         alert();
       },
+      /* async preConfirm() {
+        const deleteCourseComment = await deleteCourseCommentAPI(row.id);
+
+        if (deleteCourseComment.success) {
+          setRefetch(!refetch);
+
+          toast.success("نظر با موفقیت حذف شد !");
+        }
+      }, */
     }).then(function (result) {
       if (result.value) {
         navigate("/articles");
         MySwal.fire({
           icon: "success",
-          title: "فرایند ایجاد خبر لغو شد",
+          title: "فرایند ویرایش کاربر لغو شد",
           customClass: {
             container: "Font-Iran",
             confirmButton: "btn btn-success",
@@ -110,27 +106,47 @@ const AddNews = () => {
     });
   };
 
-  const [Category, setCategory] = useState([]);
   const GetNewCat = async () => {
     const NewsCat = await getNewsCatAPI();
-    console.log(NewsCat);
     setCategory(NewsCat);
   };
 
+  const GetNewDetail = async () => {
+    const GetNew = await getNewsByIdAPI(param.id);
+    setInitialValues({
+      Id: GetNew.detailsNewsDto.id,
+      Active: true,
+      Title: GetNew.detailsNewsDto.title,
+      GoogleTitle: GetNew.detailsNewsDto.googleTitle,
+      GoogleDescribe: GetNew.detailsNewsDto.googleDescribe,
+      Describe: GetNew.detailsNewsDto.describe,
+      NewsCatregoryId: GetNew.detailsNewsDto.newsCatregoryId,
+      MiniDescribe: GetNew.detailsNewsDto.miniDescribe,
+      Keyword: GetNew.detailsNewsDto.keyword,
+    });
+  };
+
   useEffect(() => {
+    GetNewDetail();
     GetNewCat();
   }, []);
+
+  // Conditional rendering to ensure initialValues are set before rendering Formik
+  if (!initialValues) {
+    return <div>Loading...</div>; // Loading state while fetching initialValues
+  }
 
   return (
     <Fragment>
       <Breadcrumbs
-        title="ایجاد خبر جدید"
-        data={[{ title: "لیست اخبار" }, { title: "ایجاد خبر جدید" }]}
+        title="ویرایش خبر"
+        data={[{ title: "لیست اخبار" }, { title: " ویرایش خبر " }]}
       />
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
+        enableReinitialize // This allows Formik to reinitialize with new initialValues
       >
         {({ errors, touched }) => (
           <Form>
@@ -202,7 +218,6 @@ const AddNews = () => {
                       }`}
                       id="exampleSelect"
                     >
-                      <option value={null}>انتخاب دسته بندی</option>
                       {Category.map((item, key) => (
                         <option value={item.id} key={key}>
                           {item.categoryName}
@@ -285,4 +300,4 @@ const AddNews = () => {
   );
 };
 
-export default AddNews;
+export default EditNews;

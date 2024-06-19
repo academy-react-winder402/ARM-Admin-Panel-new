@@ -132,11 +132,6 @@ const UsersListTable = ({
   setRefetch,
   refetch,
 }) => {
-  // ** Function in get data on page change
-  const handlePagination = (page) => {
-    setCurrentPage(page.selected + 1);
-  };
-
   // ** Function in get data on rows per page
   const handlePerPage = (e) => {
     const value = parseInt(e.currentTarget.value);
@@ -351,30 +346,33 @@ const UsersListTable = ({
                 to={`/Users/Detail/${row.id}`}
               >
                 <FileText size={14} className="me-50" />
-                <span className="align-middle">اطلاعات بیشتر</span>
+                <span className="align-middle"> جزییات خبر</span>
               </DropdownItem>
-              <DropdownItem
-                tag="a"
-                href="/"
-                className="w-100"
-                onClick={(e) => e.preventDefault()}
-              >
-                <Archive size={14} className="me-50" />
-                <span className="align-middle">ویرایش دوره</span>
-              </DropdownItem>
+              {}
+
               {row.isActive ? (
-                <DropdownItem
-                  tag="a"
-                  href="/"
-                  className="w-100"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    HandleActive(false, row.id);
-                  }}
-                >
-                  <XCircle size={14} className="me-50" />
-                  <span className="align-middle">غیر فعال کردن دوره</span>
-                </DropdownItem>
+                <>
+                  <DropdownItem
+                    tag={Link}
+                    to={`/EditArticle/${row.id}`}
+                    className="w-100"
+                  >
+                    <Archive size={14} className="me-50" />
+                    <span className="align-middle">ویرایش خبر</span>
+                  </DropdownItem>
+                  <DropdownItem
+                    tag="a"
+                    href="/"
+                    className="w-100"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      HandleActive(false, row.id);
+                    }}
+                  >
+                    <XCircle size={14} className="me-50" />
+                    <span className="align-middle">غیر فعال کردن خبر</span>
+                  </DropdownItem>
+                </>
               ) : (
                 <DropdownItem
                   tag="a"
@@ -386,7 +384,7 @@ const UsersListTable = ({
                   }}
                 >
                   <Check size={14} className="me-50" />
-                  <span className="align-middle"> فعال کردن دوره</span>
+                  <span className="align-middle"> فعال کردن خبر</span>
                 </DropdownItem>
               )}
             </DropdownMenu>
