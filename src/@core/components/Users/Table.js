@@ -145,7 +145,7 @@ const CustomHeader = ({
           <div className="d-flex align-items-center table-header-actions">
             <Button
               tag={Link}
-              to="/create-user"
+              to="/Users/add"
               className="add-new-user"
               color="primary"
             >
