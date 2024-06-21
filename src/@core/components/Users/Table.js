@@ -443,7 +443,6 @@ const UsersListTable = ({
                 className="w-100"
                 onClick={(e) => {
                   e.preventDefault();
-                  store.dispatch(deleteUser(row.id));
                 }}
               >
                 <Trash2 size={14} className="me-50" />

@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 // ** Reactstrap Imports
 import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
@@ -8,16 +8,24 @@ import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 import { User, Lock, Bookmark, Bell, Link } from "react-feather";
 import Cards from "./Cards.js";
 
-// ** User Components
-// import InvoiceList from './InvoiceList'
-// import SecurityTab from './SecurityTab'
-// import Connections from './Connections'
-// import BillingPlanTab from './BillingTab'
-// import UserTimeline from './UserTimeline'
-// import Notifications from './Notifications'
-// import UserProjectsList from './UserProjectsList'
+import { getCourseReserveAPI } from "../../@core/services/api/Course/Courses.js";
+import { useParams } from "react-router-dom";
+import ReserveList from "../../@core/components/course/ReserveList/Table.js";
 
 const UserTabs = ({ active, toggleTab, data }) => {
+  const param = useParams();
+  const [aa, setReserveData] = useState([{ asd: 1 }, { asd: 2 }]);
+
+  const GetReserve = async (id) => {
+    const Reserve = await getCourseReserveAPI(id);
+    console.log(Reserve);
+    //setReserveData(Reserve);
+  };
+
+  useEffect(() => {
+    GetReserve(param.id);
+  }, []);
+
   return (
     <Fragment>
       <Nav pills className="mb-2">
@@ -42,13 +50,10 @@ const UserTabs = ({ active, toggleTab, data }) => {
       </Nav>
       <TabContent activeTab={active}>
         <TabPane tabId="1">
-          {/* <UserProjectsList />
-          <UserTimeline />
-          <InvoiceList /> */}
           <Cards data={data} />
         </TabPane>
         <TabPane tabId="2">
-          <h2>Salam</h2>
+          <ReserveList data={aa} />
         </TabPane>
         <TabPane tabId="3">
           <h2>Khodafez</h2>

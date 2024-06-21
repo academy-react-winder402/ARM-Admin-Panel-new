@@ -1,11 +1,6 @@
 /* eslint-disable semi */
 // ** React Imports
 import { useEffect, useState } from "react";
-import { useParams, Link, Await } from "react-router-dom";
-
-// ** Store & Actions
-// import { getUser } from "../store";
-// import { useSelector, useDispatch } from "react-redux";
 
 // ** Reactstrap Imports
 import { Row, Col } from "reactstrap";
@@ -14,11 +9,16 @@ import UserTabs from "./UserTabs";
 
 // ** Styles
 import "@styles/react/apps/app-users.scss";
-import axios from "axios";
+
+import ReserveList from "../../@core/components/course/ReserveList/Table";
+
+import { getCourseByIdAPI } from "../../@core/services/api/Course/Courses";
+import { useParams } from "react-router-dom";
 
 const UserView = () => {
   const [data, setData] = useState({});
   const [active, setActive] = useState("1");
+  const param = useParams();
 
   const toggleTab = (tab) => {
     if (active !== tab) {
@@ -27,11 +27,9 @@ const UserView = () => {
   };
 
   const fetch = async () => {
-    const fetchData = await axios.get(
-      "https://classapi.sepehracademy.ir/api/Home/GetCoursesWithPagination"
-    );
-    setData(fetchData.data.courseFilterDtos[0]);
-    console.log(fetchData.data.courseFilterDtos[0]);
+    const Course = await getCourseByIdAPI(param.id);
+    setData(Course);
+    //console.log(Course);
   };
   useEffect(() => {
     // setData({
@@ -44,16 +42,6 @@ const UserView = () => {
 
     fetch();
   }, []);
-
-  // const dispatch = useDispatch();
-
-  // ** Hooks
-  // const { id } = useParams();
-
-  // ** Get suer on mount
-  // useEffect(() => {
-  //   dispatch(getUser(parseInt(id)));
-  // }, [dispatch]);
 
   return (
     <div className="app-user-view">

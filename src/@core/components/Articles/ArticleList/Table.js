@@ -348,8 +348,6 @@ const UsersListTable = ({
                 <FileText size={14} className="me-50" />
                 <span className="align-middle"> جزییات خبر</span>
               </DropdownItem>
-              {}
-
               {row.isActive ? (
                 <>
                   <DropdownItem

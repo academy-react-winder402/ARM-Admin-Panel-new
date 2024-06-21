@@ -66,8 +66,8 @@ const AddNews = () => {
   return (
     <Fragment>
       <Breadcrumbs
-        title="ایجاد خبر جدید"
-        data={[{ title: "لیست اخبار" }, { title: "ایجاد خبر جدید" }]}
+        title="ایجاد کاربر جدید"
+        data={[{ title: "لیست کاربران" }, { title: "ایجاد کاربر جدید" }]}
       />
       <Card>
         <Formik

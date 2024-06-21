@@ -1,6 +1,6 @@
 // ** React Imports
-import { Fragment, lazy } from "react";
-import { Navigate } from "react-router-dom";
+import { Fragment, lazy, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 // ** Layouts
 import BlankLayout from "@layouts/BlankLayout";
 import VerticalLayout from "@src/layouts/VerticalLayout";
@@ -12,6 +12,7 @@ import PublicRoute from "@components/routes/PublicRoute";
 
 // ** Utils
 import { isObjEmpty } from "@utils";
+import { getItem } from "../../@core/services/common/storage.services.js";
 
 const getLayout = {
   blank: <BlankLayout />,
@@ -31,11 +32,14 @@ const MembersList = lazy(() => import("../../pages/Users/Users.jsx"));
 const MemberDetail = lazy(() => import("../../pages/UserProfile/index.js"));
 const MemberEdit = lazy(() => import("../../pages/Users/EditUser.jsx"));
 const AddUser = lazy(() => import("../../pages/Users/AddUser.jsx"));
+const EditUser = lazy(() => import("../../pages/Users/EditUser.jsx"));
 
 /* Courses pages */
 const ListOfCourse = lazy(() => import("../../pages/course/Courses.jsx"));
 const CreateCourse = lazy(() => import("../../pages/course/BuildCourse.js"));
-import UserView from "../../@core/components/course/reserveList/UserView.js";
+const CourseDetail = lazy(() =>
+  import("../../pages/CourseDetail/CourseDetail.jsx")
+);
 
 /* Articles pages */
 const ListOfArticle = lazy(() => import("../../pages/Articles/Article.jsx"));
@@ -77,6 +81,10 @@ const Routes = [
     path: "/Users/Add",
     element: <AddUser />,
   },
+  {
+    path: "/Users/Edit",
+    element: <EditUser />,
+  },
 
   // Course
   {
@@ -88,8 +96,8 @@ const Routes = [
     element: <CreateCourse />,
   },
   {
-    path: "/Courses/Detail",
-    element: <UserView />,
+    path: "/Courses/Detail/:id",
+    element: <CourseDetail />,
   },
 
   // News
@@ -173,6 +181,13 @@ const getRouteMeta = (route) => {
 // ** Return Filtered Array of Routes & Paths
 const MergeLayoutRoutes = (layout, defaultLayout) => {
   const LayoutRoutes = [];
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = getItem("token");
+    {
+      !token && navigate("/login");
+    }
+  }, []);
 
   if (Routes) {
     Routes.filter((route) => {

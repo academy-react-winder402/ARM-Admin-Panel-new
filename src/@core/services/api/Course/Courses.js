@@ -48,3 +48,21 @@ export const DeleteRestoreCourseAPI = async (Active, id) => {
     return false;
   }
 };
+export const getCourseByIdAPI = async (id) => {
+  try {
+    const response = await http.get(APIs_Path.GetCourseById + id);
+
+    return response;
+  } catch (error) {
+    return false;
+  }
+};
+export const getCourseReserveAPI = async (id) => {
+  try {
+    const response = await http.get(APIs_Path.CourseReserve + id);
+
+    return response;
+  } catch (error) {
+    return false;
+  }
+};

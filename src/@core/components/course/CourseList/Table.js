@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 // ** React Imports
 import { forwardRef, Fragment } from "react";
 
@@ -275,6 +276,7 @@ const UsersListTable = ({
                   textOverflow: "ellipsis",
                   maxWidth: "150px",
                 }}
+                to={"/Courses/Detail/" + row.courseId}
               >
                 {row.title ? row.title : "دوره بی نام"}
               </Link>
