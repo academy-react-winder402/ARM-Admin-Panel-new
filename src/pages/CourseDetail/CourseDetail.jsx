@@ -10,8 +10,6 @@ import UserTabs from "./UserTabs";
 // ** Styles
 import "@styles/react/apps/app-users.scss";
 
-import ReserveList from "../../@core/components/course/ReserveList/Table";
-
 import { getCourseByIdAPI } from "../../@core/services/api/Course/Courses";
 import { useParams } from "react-router-dom";
 

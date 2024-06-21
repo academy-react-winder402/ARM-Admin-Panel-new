@@ -10,11 +10,10 @@ import Cards from "./Cards.js";
 
 import { getCourseReserveAPI } from "../../@core/services/api/Course/Courses.js";
 import { useParams } from "react-router-dom";
-import ReserveList from "../../@core/components/course/ReserveList/Table.js";
+import ReserveList from "./ReserveList.jsx";
 
 const UserTabs = ({ active, toggleTab, data }) => {
   const param = useParams();
-  const [aa, setReserveData] = useState([{ asd: 1 }, { asd: 2 }]);
 
   const GetReserve = async (id) => {
     const Reserve = await getCourseReserveAPI(id);
@@ -53,7 +52,7 @@ const UserTabs = ({ active, toggleTab, data }) => {
           <Cards data={data} />
         </TabPane>
         <TabPane tabId="2">
-          <ReserveList data={aa} />
+          <ReserveList teacherId={data.teacherId} />
         </TabPane>
         <TabPane tabId="3">
           <h2>Khodafez</h2>
