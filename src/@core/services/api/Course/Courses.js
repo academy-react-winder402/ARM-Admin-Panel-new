@@ -17,6 +17,21 @@ export const getCourseListsAPI = async (pageNumber, rowsOfPage, query) => {
     return false;
   }
 };
+export const getCourseGroupAPI = async (pageNumber, rowsOfPage, query) => {
+  try {
+    const response = await http.get(APIs_Path.CourseGroup, {
+      params: {
+        pageNumber,
+        rowsOfPage,
+        query,
+      },
+    });
+
+    return response;
+  } catch (error) {
+    return false;
+  }
+};
 export const ActiveDeActiveCourseAPI = async (Active, id) => {
   try {
     const CurrObj = {

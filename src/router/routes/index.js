@@ -37,6 +37,7 @@ const EditUser = lazy(() => import("../../pages/Users/EditUser.jsx"));
 /* Courses pages */
 const ListOfCourse = lazy(() => import("../../pages/course/Courses.jsx"));
 const CreateCourse = lazy(() => import("../../pages/course/BuildCourse.js"));
+const CoursesGroup = lazy(() => import("../../pages/CourseGroup/Courses.jsx"));
 const CourseDetail = lazy(() =>
   import("../../pages/CourseDetail/CourseDetail.jsx")
 );
@@ -47,6 +48,11 @@ const AddArticle = lazy(() => import("../../pages/Articles/AddArticle.jsx"));
 const EditArticle = lazy(() => import("../../pages/Articles/EditArticle.jsx"));
 const ArticleCategory = lazy(() =>
   import("../../pages/Articles/CategoryList.jsx")
+);
+
+/* comments pages */
+const Comments = lazy(() =>
+  import("../../@core/components/commentManagement/index.js")
 );
 
 const BuildCourse = lazy(() => import("../../pages/course/BuildCourse"));
@@ -99,6 +105,10 @@ const Routes = [
     path: "/Courses/Detail/:id",
     element: <CourseDetail />,
   },
+  {
+    path: "/CoursesGroup",
+    element: <CoursesGroup />,
+  },
 
   // News
   {
@@ -116,6 +126,12 @@ const Routes = [
   {
     path: "/ArticleCategory",
     element: <ArticleCategory />,
+  },
+
+  // Comments
+  {
+    path: "/Comment",
+    element: <Comments />,
   },
 
   // Others

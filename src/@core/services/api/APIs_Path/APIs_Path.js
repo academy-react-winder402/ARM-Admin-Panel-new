@@ -9,6 +9,7 @@ export const APIs_Path = {
   ActiveDeActiveCourse: "/Course/ActiveAndDeactiveCourse",
   DeleteRestoreCourse: "/Course/DeleteCourse",
   CourseReserve: "/CourseReserve/",
+  CourseGroup: "/CourseGroup",
   CourseReserveDelete: "/CourseReserve",
   GetCourseGroup: "/CourseGroup/GetCourseGroup",
   SendReserveToCourse: "/CourseReserve/SendReserveToCourse",

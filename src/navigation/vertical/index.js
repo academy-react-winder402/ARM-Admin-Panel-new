@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { BubbleController } from "chart.js";
 import { Bubble } from "react-chartjs-2";
 
@@ -39,6 +40,12 @@ export default [
         title: "لیست دوره ها",
         icon: <BookOpen />,
         navLink: "/courses",
+      },
+      {
+        id: "CoursesGroup",
+        title: "گروه های دوره",
+        icon: <BookOpen />,
+        navLink: "/CoursesGroup",
       },
     ],
   },
