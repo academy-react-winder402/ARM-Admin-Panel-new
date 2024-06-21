@@ -139,13 +139,13 @@ const UsersListTable = ({
   // ** Function in get data on rows per page
   const handlePerPage = (e) => {
     const value = parseInt(e.currentTarget.value);
-    setCurrentPage(1);
+    setCurrentPage(0);
     setRowsOfPage(value);
   };
 
   // ** Function in get data on search query change
   const handleFilter = (val) => {
-    setCurrentPage(1);
+    setCurrentPage(0);
     setQuery(val);
   };
 
