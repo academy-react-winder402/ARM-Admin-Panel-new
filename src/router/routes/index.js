@@ -14,6 +14,7 @@ import PublicRoute from "@components/routes/PublicRoute";
 import { isObjEmpty } from "@utils";
 import { getItem } from "../../@core/services/common/storage.services.js";
 import UpdateCourse from "../../pages/UpdateCourse/UpdateCourse.js";
+import BlogDetails from "../../pages/News/NewsDetails.js";
 
 const getLayout = {
   blank: <BlankLayout />,
@@ -120,6 +121,10 @@ const Routes = [
   {
     path: "/AddArticle",
     element: <AddArticle />,
+  },
+  {
+    path: "/Articles/:id",
+    element: <BlogDetails />,
   },
   {
     path: "/EditArticle/:id",
