@@ -78,8 +78,7 @@ const CustomHeader = ({ handlePerPage, rowsOfPage, handleFilter, query }) => {
               id="rows-per-page"
               value={rowsOfPage}
               onChange={handlePerPage}
-              style={{ width: "5rem" }}
-            >
+              style={{ width: "5rem" }}>
               <option value="8">۸</option>
               <option value="12">۱۲</option>
               <option value="24">۲۴</option>
@@ -89,8 +88,7 @@ const CustomHeader = ({ handlePerPage, rowsOfPage, handleFilter, query }) => {
         </Col>
         <Col
           xl="10"
-          className="d-flex align-items-sm-center justify-content-xl-end justify-content-start flex-xl-nowrap flex-wrap flex-sm-row flex-column pe-xl-1 p-0 mt-xl-0 mt-1"
-        >
+          className="d-flex align-items-sm-center justify-content-xl-end justify-content-start flex-xl-nowrap flex-wrap flex-sm-row flex-column pe-xl-1 p-0 mt-xl-0 mt-1">
           <div className="d-flex align-items-center mb-sm-0 mb-1 me-1">
             <label className="mb-0" htmlFor="search-invoice">
               جستجو:
@@ -110,8 +108,7 @@ const CustomHeader = ({ handlePerPage, rowsOfPage, handleFilter, query }) => {
               tag={Link}
               to="/create-user"
               className="add-new-user"
-              color="primary"
-            >
+              color="primary">
               افزودن دوره
             </Button>
           </div>
@@ -213,8 +210,7 @@ const UsersListTable = ({
             display: "flex",
             flexFlow: "row",
             gap: "15px",
-          }}
-        >
+          }}>
           {row.currentImageAddressTumb == "undefined" ||
           row.currentImageAddressTumb == null ? (
             <span
@@ -224,8 +220,7 @@ const UsersListTable = ({
                 borderRadius: "100%",
                 backgroundColor: "gray",
                 marginTop: "5px",
-              }}
-            >
+              }}>
               {/* <img
                 style={{
                   width: "30px",
@@ -250,6 +245,7 @@ const UsersListTable = ({
           )}
 
           <Link
+            to={"/Articles/" + row.id}
             style={{
               fontSize: "15px",
               whiteSpace: "nowrap",
@@ -257,9 +253,8 @@ const UsersListTable = ({
               textOverflow: "ellipsis",
               maxWidth: "250px",
               lineHeight: "40px",
-            }}
-          >
-            {row.title ? row.title : "دوره بی نام"}
+            }}>
+            {row.title ? row.title : "خبر بی نام"}
           </Link>
         </div>
       ),
@@ -288,8 +283,7 @@ const UsersListTable = ({
             marginTop: "5px",
             fontSize: "14px",
             fontFamily: "IransnsNumber",
-          }}
-        >
+          }}>
           {DateGenerator(row.insertDate)}
         </span>
       ),
@@ -322,8 +316,7 @@ const UsersListTable = ({
         <span
           style={{
             textIndent: "8px",
-          }}
-        >
+          }}>
           {Intl.NumberFormat({
             maximumSignificantDigits: 3,
           }).format(row.currentView)}
@@ -343,8 +336,7 @@ const UsersListTable = ({
               <DropdownItem
                 tag={Link}
                 className="w-100"
-                to={`/Users/Detail/${row.id}`}
-              >
+                to={`/Users/Detail/${row.id}`}>
                 <FileText size={14} className="me-50" />
                 <span className="align-middle"> جزییات خبر</span>
               </DropdownItem>
@@ -353,8 +345,7 @@ const UsersListTable = ({
                   <DropdownItem
                     tag={Link}
                     to={`/EditArticle/${row.id}`}
-                    className="w-100"
-                  >
+                    className="w-100">
                     <Archive size={14} className="me-50" />
                     <span className="align-middle">ویرایش خبر</span>
                   </DropdownItem>
@@ -365,8 +356,7 @@ const UsersListTable = ({
                     onClick={(e) => {
                       e.preventDefault();
                       HandleActive(false, row.id);
-                    }}
-                  >
+                    }}>
                     <XCircle size={14} className="me-50" />
                     <span className="align-middle">غیر فعال کردن خبر</span>
                   </DropdownItem>
@@ -379,8 +369,7 @@ const UsersListTable = ({
                   onClick={(e) => {
                     e.preventDefault();
                     HandleActive(true, row.id);
-                  }}
-                >
+                  }}>
                   <Check size={14} className="me-50" />
                   <span className="align-middle"> فعال کردن خبر</span>
                 </DropdownItem>
