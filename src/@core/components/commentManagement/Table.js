@@ -177,39 +177,6 @@ const UsersList = () => {
   return (
     <Fragment>
       <Card>
-        <CardHeader>
-          <CardTitle tag="h4">فیلتر</CardTitle>
-        </CardHeader>
-        <CardBody>
-          <Row>
-            <Col md="4">
-              <Label for="status-select">وضعیت</Label>
-              <Select
-                theme={selectThemeColors}
-                isClearable={false}
-                className="react-select"
-                classNamePrefix="select"
-                value={accepted}
-                options={isAcceptOptions}
-                onChange={(data) => setAccepted(data)}
-              />
-            </Col>
-            <Col md="4">
-              <Label for="status-select">وضعیت</Label>
-              <Select
-                theme={selectThemeColors}
-                isClearable={false}
-                className="react-select"
-                classNamePrefix="select"
-                options={statusOptions}
-                value={sortCol}
-                onChange={(data) => setSortCol(data)}
-              />
-            </Col>
-          </Row>
-        </CardBody>
-      </Card>
-      <Card>
         <div className="react-dataTable">
           <CustomHeader
             toggleSidebar={toggleSidebar}

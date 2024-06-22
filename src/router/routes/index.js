@@ -131,7 +131,7 @@ const Routes = [
 
   // Comments
   {
-    path: "/Comment1",
+    path: "/CourseComments",
     element: <Commentskh />,
   },
   {

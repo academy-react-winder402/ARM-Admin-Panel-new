@@ -47,6 +47,12 @@ export default [
         icon: <BookOpen />,
         navLink: "/CoursesGroup",
       },
+      {
+        id: "CoursesGroup",
+        title: "کامنت های دوره ها",
+        icon: <BookOpen />,
+        navLink: "/CourseComments",
+      },
     ],
   },
 
