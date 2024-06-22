@@ -6,6 +6,8 @@ export const APIs_Path = {
   // Course
   GetAllCourse: "/Course/CourseList",
   GetCourseById: "/Course/",
+  Course: "/Course",
+  AddCourseTech: "/Course/AddCourseTechnology",
   ActiveDeActiveCourse: "/Course/ActiveAndDeactiveCourse",
   DeleteRestoreCourse: "/Course/DeleteCourse",
   CourseReserve: "/CourseReserve/",
