@@ -51,9 +51,10 @@ const ArticleCategory = lazy(() =>
 );
 
 /* comments pages */
-const Comments = lazy(() =>
+const Commentskh = lazy(() =>
   import("../../@core/components/commentManagement/index.js")
 );
+const Comments = lazy(() => import("../../pages/Comments/Comments.js"));
 
 const BuildCourse = lazy(() => import("../../pages/course/BuildCourse"));
 const Login = lazy(() => import("../../pages/Login"));
@@ -130,7 +131,11 @@ const Routes = [
 
   // Comments
   {
-    path: "/Comment",
+    path: "/Comment1",
+    element: <Commentskh />,
+  },
+  {
+    path: "/Comments",
     element: <Comments />,
   },
 

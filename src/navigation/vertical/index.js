@@ -75,4 +75,11 @@ export default [
       },
     ],
   },
+
+  /* {
+    id: "Comments",
+    title: "کامنت ها",
+    icon: <User size={20} />,
+    navLink: "/Comments",
+  }, */
 ];

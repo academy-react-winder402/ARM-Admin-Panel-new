@@ -22,12 +22,16 @@ const validationSchema = Yup.object({
       /(0|\+98)?([ ]|-|[()]){0,2}9[1|2|3|4]([ ]|-|[()]){0,2}(?:[0-9]([ ]|-|[()]){0,2}){8}/,
       "یک شماره موبایل صحیح وارد کنید"
     ),
-  aboutUser: Yup.string(),
-  birthDate: Yup.date(),
-  nationalId: Yup.string(),
-  telegramLink: Yup.string().url("لینک تلگرام صحیح نیست"),
-  linkedinAddress: Yup.string().url("آدرس لینکدین صحیح نیست"),
-  homeAddress: Yup.string(),
+  aboutUser: Yup.string().required("درباره کاربر الزامی است"),
+  birthDate: Yup.date().required("تاریخ تولد الزامی است"),
+  nationalId: Yup.string().required("کد ملی الزامی است"),
+  telegramLink: Yup.string()
+    .url("لینک تلگرام صحیح نیست")
+    .required("لینک تلگرام الزامی است"),
+  linkedinAddress: Yup.string()
+    .url("آدرس لینکدین صحیح نیست")
+    .required("آدرس لینکدین الزامی است"),
+  homeAddress: Yup.string().required("آدرس منزل الزامی است"),
 });
 
 const initialValues = {
@@ -78,7 +82,7 @@ const EditUser = () => {
               <CardBody>
                 <Row>
                   <Col sm="6" className="mb-1">
-                    <div className="d-flex align-items-center ">
+                    <div className="d-flex align-items-center">
                       <Label className="form-label mb-1">نام</Label>
                       {errors.firstName && touched.firstName && (
                         <div className="text-danger ms-2 mb-1">
