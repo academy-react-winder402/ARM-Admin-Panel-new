@@ -1,5 +1,5 @@
 // ** React Imports
-import { Fragment, useContext } from "react";
+import { Fragment, useContext,useState ,useEffect} from "react";
 
 // ** Reactstrap Imports
 import { Row, Col, Card, CardTitle, CardBody } from "reactstrap";
@@ -20,11 +20,23 @@ import {
   Award,
   Users,
 } from "react-feather";
+import EditorJsComponent from "../../@core/components/EditorJs";
 
 const Cards = ({ data }) => {
   // ** Context
   const context = useContext(ThemeColors);
 
+  const [Describe, setDescribe] = useState();
+  useEffect(() => {
+    
+      if (data.describe&& data.describe.includes("blocks", "{", "}")) {
+        const newDescribe = JSON.parse(data.describe);
+        setDescribe(newDescribe);
+        console.log("describe json", data.describe);
+      } else {
+        setDescribe(data.describe);
+      }
+  }, [data.describe]);
   return (
     <Fragment>
       <Row>
@@ -93,7 +105,13 @@ const Cards = ({ data }) => {
           <CardTitle className="mb-60" tag="h4">
             توضیحات مقالات :
           </CardTitle>
-          <p className="mb-0">{data.describe}</p>
+          {/* <p className="mb-0">{data.describe}</p> */}
+          
+        {typeof Describe === "object" && Describe !== null ? (
+          <EditorJsComponent dontShowBtn={true} defaultData={Describe} />
+        ) : (
+          <p>{Describe}</p>
+        )}
         </CardBody>
       </Card>
     </Fragment>
