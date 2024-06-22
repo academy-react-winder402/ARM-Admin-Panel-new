@@ -357,7 +357,8 @@ const UsersListTable = ({
     {
       name: "مدیریت",
       minWidth: "100px",
-      cell: (row) => (
+      cell: (row) => {
+        return(
         <div className="column-action">
           <UncontrolledDropdown>
             <DropdownToggle tag="div" className="btn btn-sm">
@@ -367,16 +368,15 @@ const UsersListTable = ({
               <DropdownItem
                 tag={Link}
                 className="w-100"
-                to={`/Users/Detail/${row.id}`}
+                to={`/Courses/Detail/${row.courseId}`}
               >
                 <FileText size={14} className="me-50" />
                 <span className="align-middle">اطلاعات بیشتر</span>
               </DropdownItem>
               <DropdownItem
-                tag="a"
-                href="/"
+                tag={Link}
+                to={`/Course/edit/${row.courseId}`}
                 className="w-100"
-                onClick={(e) => e.preventDefault()}
               >
                 <Archive size={14} className="me-50" />
                 <span className="align-middle">ویرایش دوره</span>
@@ -438,7 +438,7 @@ const UsersListTable = ({
             </DropdownMenu>
           </UncontrolledDropdown>
         </div>
-      ),
+      )},
     },
   ];
 

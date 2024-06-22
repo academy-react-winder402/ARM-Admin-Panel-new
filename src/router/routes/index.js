@@ -13,6 +13,7 @@ import PublicRoute from "@components/routes/PublicRoute";
 // ** Utils
 import { isObjEmpty } from "@utils";
 import { getItem } from "../../@core/services/common/storage.services.js";
+import UpdateCourse from "../../pages/UpdateCourse/UpdateCourse.js";
 
 const getLayout = {
   blank: <BlankLayout />,
@@ -147,6 +148,10 @@ const Routes = [
   {
     path: "/buildCourse",
     element: <BuildCourse />,
+  },
+  {
+    path: "/course/edit/:id",
+    element: <UpdateCourse />,
   },
   {
     path: "/login",
